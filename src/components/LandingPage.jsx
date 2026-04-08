@@ -1,4 +1,4 @@
-import { Zap, Globe, Gamepad2, Brain, ChefHat, BookOpen } from 'lucide-react'
+import { Zap, Globe, Gamepad2, Brain, ChefHat, BookOpen, Target } from 'lucide-react'
 import AppCard from './AppCard'
 import './LandingPage.css'
 
@@ -32,6 +32,12 @@ const appsList = [
     icon: ChefHat,
     description: 'Discover amazing recipes and expand your culinary horizons.',
     route: '/recipe-generator/',
+  },
+  {
+    name: 'OX Bull Cow',
+    icon: Target,
+    description: 'Crack the secret code! A classic guessing game with bulls and cows.',
+    route: '/ox-bull-cow/',
   },
 ]
 
