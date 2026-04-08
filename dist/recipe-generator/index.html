@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Generator - Coming Soon</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #0f1535 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            max-width: 600px;
+        }
+
+        .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(255, 140, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+        }
+
+        .description {
+            font-size: 16px;
+            color: #888;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+            color: #0a0e27;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.3);
+        }
+
+        .status {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 140, 0, 0.1);
+            border-left: 4px solid #ff8c00;
+            border-radius: 4px;
+            text-align: left;
+        }
+
+        .status-title {
+            color: #ff8c00;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .status-text {
+            color: #b0b0b0;
+            font-size: 14px;
+        }
+
+        .glow {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #00ff00;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .nav-back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #00ffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-back:hover {
+            transform: translateX(-5px);
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="nav-back">← Back to Home</a>
+
+    <div class="container">
+        <div class="icon">👨‍🍳🍳</div>
+        <h1>Recipe Generator</h1>
+        <p class="subtitle">Discover Delicious Recipes</p>
+
+        <p class="description">
+            AI-powered recipe generator that creates unique dishes based on ingredients you have. Never run out of meal ideas!
+        </p>
+
+        <button class="button" onclick="alert('This app is coming soon! Check back soon.')">
+            Learn More
+        </button>
+
+        <div class="status">
+            <div class="status-title">
+                <span class="glow"></span>Platform Status
+            </div>
+            <div class="status-text">
+                ✓ App is under development<br>
+                ✓ Coming to QuizItNow soon<br>
+                ✓ Check back shortly for launch
+            </div>
+        </div>
+    </div>
+</body>
+</html>
