@@ -1,0 +1,9 @@
+[submodule "public/cosmic-word-play"]
+	path = public/cosmic-word-play
+	url = https://github.com/subhasisofficial87-prog/cosmic-word-play.git
+[submodule "public/guess-my-neon"]
+	path = public/guess-my-neon
+	url = https://github.com/subhasisofficial87-prog/guess-my-neon.git
+[submodule "public/quizitnow"]
+	path = public/quizitnow
+	url = https://github.com/subhasisofficial87-prog/quizitnow.git
