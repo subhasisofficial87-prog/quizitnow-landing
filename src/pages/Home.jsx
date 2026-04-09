@@ -12,7 +12,7 @@ import {
 const apps = [
   {
     id: 1,
-    name: 'Cosmic Word Play',
+    name: 'Word Play',
     icon: Zap,
     color: '#00ffff',
     route: '/cosmic-word-play',
@@ -28,7 +28,7 @@ const apps = [
   },
   {
     id: 3,
-    name: 'Guess My Neon',
+    name: 'Guess My Number',
     icon: Gamepad2,
     color: '#ff0080',
     route: '/guess-my-neon',
