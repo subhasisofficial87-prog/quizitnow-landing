@@ -7,6 +7,7 @@ import {
   Brain,
   ChefHat,
   Target,
+  Sparkles,
   Sun,
   Moon
 } from 'lucide-react'
@@ -60,6 +61,14 @@ const apps = [
     color: '#00d4ff',
     route: '/ox-bull-cow',
     delay: 0.6
+  },
+  {
+    id: 7,
+    name: 'Glow Dots',
+    icon: Sparkles,
+    color: '#ff1493',
+    route: '/glow-dots',
+    delay: 0.7
   }
 ]
 

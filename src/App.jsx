@@ -9,6 +9,7 @@ import RecipeGenerator from './pages/RecipeGenerator'
 import OXBullCow from './pages/OXBullCow'
 import TermsOfService from './pages/TermsOfService'
 import PrivacyPolicy from './pages/PrivacyPolicy'
+import GlowDots from './pages/GlowDots'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route path="/ox-bull-cow" element={<OXBullCow />} />
       <Route path="/terms" element={<TermsOfService />} />
       <Route path="/privacy" element={<PrivacyPolicy />} />
+      <Route path="/glow-dots" element={<GlowDots />} />
     </Routes>
   )
 }
