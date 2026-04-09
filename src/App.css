@@ -474,3 +474,83 @@
 html {
   scroll-behavior: smooth;
 }
+
+/* Game Page Styles */
+.game-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #0a0e27 0%, #0f1535 100%);
+  color: #ffffff;
+}
+
+.game-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: rgba(10, 14, 39, 0.8);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #00ffff1a, #ff00801a);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  color: #00ffff;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.back-button:hover {
+  background: linear-gradient(135deg, #00ffff, #ff0080);
+  border-color: #00ffff;
+  color: #0a0e27;
+  box-shadow: 0 0 15px #00ffff80;
+  transform: translateY(-2px);
+}
+
+.game-header h1 {
+  font-size: 2rem;
+  margin: 0;
+  background: linear-gradient(135deg, #00ffff, #ff0080);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.game-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.placeholder {
+  text-align: center;
+  padding: 3rem;
+  background: rgba(26, 31, 58, 0.5);
+  border: 2px dashed rgba(0, 255, 255, 0.2);
+  border-radius: 12px;
+  color: #b0b0b0;
+}
+
+.placeholder p:first-child {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.placeholder p:last-child {
+  font-size: 1rem;
+  opacity: 0.7;
+}

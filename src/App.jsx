@@ -1,117 +1,24 @@
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import './App.css'
-import { useState } from 'react'
-import {
-  Zap,
-  Globe,
-  Gamepad2,
-  Brain,
-  ChefHat,
-  Target
-} from 'lucide-react'
-
-const apps = [
-  {
-    id: 1,
-    name: 'Cosmic Word Play',
-    icon: Zap,
-    color: '#00ffff',
-    route: 'https://github.com/subhasisofficial87-prog/cosmic-word-play-4dd7f5b1',
-    delay: 0.1
-  },
-  {
-    id: 2,
-    name: 'Zoomable Earth',
-    icon: Globe,
-    color: '#00ff88',
-    route: 'https://github.com/subhasisofficial87-prog/zoomable-earth',
-    delay: 0.2
-  },
-  {
-    id: 3,
-    name: 'Guess My Neon',
-    icon: Gamepad2,
-    color: '#ff0080',
-    route: 'https://github.com/subhasisofficial87-prog/guess-my-neon',
-    delay: 0.3
-  },
-  {
-    id: 4,
-    name: 'QuizItNow',
-    icon: Brain,
-    color: '#b026ff',
-    route: 'https://github.com/subhasisofficial87-prog/mindsnapailabs',
-    delay: 0.4
-  },
-  {
-    id: 5,
-    name: 'Recipe Generator',
-    icon: ChefHat,
-    color: '#ff6b00',
-    route: 'https://github.com/subhasisofficial87-prog/recipe-generator',
-    delay: 0.5
-  },
-  {
-    id: 6,
-    name: 'OX Bull Cow',
-    icon: Target,
-    color: '#00d4ff',
-    route: 'https://github.com/subhasisofficial87-prog/guess-bullseye-link',
-    delay: 0.6
-  }
-]
+import Home from './pages/Home'
+import CosmicWordPlay from './pages/CosmicWordPlay'
+import ZoomableEarth from './pages/ZoomableEarth'
+import GuessMyNeon from './pages/GuessMyNeon'
+import QuizItNowGame from './pages/QuizItNowGame'
+import RecipeGenerator from './pages/RecipeGenerator'
+import OXBullCow from './pages/OXBullCow'
 
 function App() {
-  const [hoveredId, setHoveredId] = useState(null)
-
   return (
-    <div className="app">
-      <div className="background">
-        <div className="grid-bg"></div>
-        <div className="glow-orb orb-1"></div>
-        <div className="glow-orb orb-2"></div>
-        <div className="glow-orb orb-3"></div>
-      </div>
-
-      <div className="container">
-        <div className="header">
-          <h1 className="title">
-            <span className="title-main">QuizItNow</span>
-            <span className="title-sub">Your Gateway to Amazing Quiz & Game Apps</span>
-          </h1>
-        </div>
-
-        <div className="buttons-grid">
-          {apps.map((app) => {
-            const IconComponent = app.icon
-            return (
-              <a
-                key={app.id}
-                href={app.route}
-                className={`app-button ${hoveredId === app.id ? 'hovered' : ''}`}
-                style={{
-                  '--color': app.color,
-                  '--delay': `${app.delay}s`,
-                  animationDelay: `${app.delay}s`
-                }}
-                onMouseEnter={() => setHoveredId(app.id)}
-                onMouseLeave={() => setHoveredId(null)}
-              >
-                <div className="button-icon">
-                  <IconComponent size={48} />
-                </div>
-                <span className="button-text">{app.name}</span>
-                <div className="button-glow"></div>
-              </a>
-            )
-          })}
-        </div>
-
-        <footer className="footer">
-          <p>Click any button to explore amazing quiz and game experiences</p>
-          <p className="footer-sub">Built with React • Powered by Vite</p>
-        </footer>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/cosmic-word-play" element={<CosmicWordPlay />} />
+      <Route path="/zoomable-earth" element={<ZoomableEarth />} />
+      <Route path="/guess-my-neon" element={<GuessMyNeon />} />
+      <Route path="/quizitnow" element={<QuizItNowGame />} />
+      <Route path="/recipe-generator" element={<RecipeGenerator />} />
+      <Route path="/ox-bull-cow" element={<OXBullCow />} />
+    </Routes>
   )
 }
 
