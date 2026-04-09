@@ -249,7 +249,7 @@ function CosmicWordPlay() {
 </head>
 <body>
     <header>
-        <h1>🌌 Cosmic Word Play</h1>
+        <h1>🌌 Word Play</h1>
         <p class="subtitle">Challenge Your Vocabulary - Guess the Word in 6 Attempts!</p>
         <div class="stats">
             <div class="stat-item"><div class="stat-value" id="gamesWon">0</div><div>Won</div></div>
