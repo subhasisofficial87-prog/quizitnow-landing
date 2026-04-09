@@ -176,7 +176,7 @@ function Home() {
 
         <footer className="footer">
           <p>Click any button to explore amazing quiz and game experiences</p>
-          <p className="footer-sub">Built with Cortex 🧠     Powered by Vortex 🌌</p>
+          <p className="footer-sub">Built with Cortex 🧠     Powered by Vortex 🕳️</p>
         </footer>
       </div>
     </div>
