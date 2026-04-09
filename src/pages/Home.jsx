@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
+  BookOpen,
   Globe,
   Gamepad2,
   Brain,
@@ -14,43 +15,51 @@ import AI3DLogo from '../components/AI3DLogo'
 const apps = [
   {
     id: 1,
-    name: 'Zoomable Earth',
-    icon: Globe,
-    color: '#00ff88',
-    route: '/zoomable-earth',
+    name: 'Word Play',
+    icon: BookOpen,
+    color: '#90EE90',
+    route: '/cosmic-word-play',
     delay: 0.1
   },
   {
     id: 2,
-    name: 'Guess My Number',
-    icon: Gamepad2,
-    color: '#ff0080',
-    route: '/guess-my-neon',
+    name: 'Zoomable Earth',
+    icon: Globe,
+    color: '#00ff88',
+    route: '/zoomable-earth',
     delay: 0.2
   },
   {
     id: 3,
-    name: 'QuizItNow',
-    icon: Brain,
-    color: '#b026ff',
-    route: '/quizitnow',
+    name: 'Guess My Number',
+    icon: Gamepad2,
+    color: '#ff0080',
+    route: '/guess-my-neon',
     delay: 0.3
   },
   {
     id: 4,
-    name: 'Recipe Generator',
-    icon: ChefHat,
-    color: '#ff6b00',
-    route: '/recipe-generator',
+    name: 'QuizItNow',
+    icon: Brain,
+    color: '#b026ff',
+    route: '/quizitnow',
     delay: 0.4
   },
   {
     id: 5,
+    name: 'Recipe Generator',
+    icon: ChefHat,
+    color: '#ff6b00',
+    route: '/recipe-generator',
+    delay: 0.5
+  },
+  {
+    id: 6,
     name: 'OX Bull Cow',
     icon: Target,
     color: '#00d4ff',
     route: '/ox-bull-cow',
-    delay: 0.5
+    delay: 0.6
   }
 ]
 
