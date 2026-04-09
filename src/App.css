@@ -175,7 +175,8 @@
   right: 0;
   bottom: 0;
   z-index: 0;
-  overflow: hidden;
+  overflow: visible;
+  pointer-events: none;
 }
 
 .grid-bg {
@@ -792,6 +793,8 @@ html {
   overflow: visible;
   z-index: 1;
   pointer-events: none;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
 }
 
 .snowflake {
@@ -806,7 +809,10 @@ html {
   animation-delay: var(--delay);
   opacity: var(--opacity);
   filter: blur(0.5px);
-  will-change: transform, opacity;
+  will-change: auto;
+  pointer-events: none;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 
 .snowflake::before {
