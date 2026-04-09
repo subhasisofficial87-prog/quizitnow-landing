@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import {
   BookOpen,
   Globe,
-  Gamepad2,
+  Calculator,
   Brain,
   ChefHat,
   Target,
@@ -32,14 +32,14 @@ const apps = [
   {
     id: 3,
     name: 'Guess My Number',
-    icon: Gamepad2,
+    icon: Calculator,
     color: '#ff0080',
     route: '/guess-my-neon',
     delay: 0.3
   },
   {
     id: 4,
-    name: 'QuizItNow',
+    name: 'Quiz Master',
     icon: Brain,
     color: '#b026ff',
     route: '/quizitnow',
