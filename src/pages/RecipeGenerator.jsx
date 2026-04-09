@@ -15,7 +15,7 @@ function RecipeGenerator() {
       </div>
       <div className="game-container-full">
         <iframe
-          src="https://recipe-generator.lovable.app"
+          src="https://no-fuss-foodie.lovable.app/"
           title="Recipe Generator"
           style={{
             width: '100%',
