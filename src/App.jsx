@@ -7,6 +7,8 @@ import GuessMyNeon from './pages/GuessMyNeon'
 import QuizItNowGame from './pages/QuizItNowGame'
 import RecipeGenerator from './pages/RecipeGenerator'
 import OXBullCow from './pages/OXBullCow'
+import TermsOfService from './pages/TermsOfService'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
       <Route path="/quizitnow" element={<QuizItNowGame />} />
       <Route path="/recipe-generator" element={<RecipeGenerator />} />
       <Route path="/ox-bull-cow" element={<OXBullCow />} />
+      <Route path="/terms" element={<TermsOfService />} />
+      <Route path="/privacy" element={<PrivacyPolicy />} />
     </Routes>
   )
 }
