@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  BookOpen,
   Globe,
   Calculator,
   Brain,
@@ -15,51 +14,43 @@ import AI3DLogo from '../components/AI3DLogo'
 const apps = [
   {
     id: 1,
-    name: 'Word Play',
-    icon: BookOpen,
-    color: '#90EE90',
-    route: '/cosmic-word-play',
-    delay: 0.1
-  },
-  {
-    id: 2,
     name: 'Zoomable Earth',
     icon: Globe,
     color: '#00ff88',
     route: '/zoomable-earth',
-    delay: 0.2
+    delay: 0.1
   },
   {
-    id: 3,
+    id: 2,
     name: 'Guess My Number',
     icon: Calculator,
     color: '#ff0080',
     route: '/guess-my-neon',
-    delay: 0.3
+    delay: 0.2
   },
   {
-    id: 4,
+    id: 3,
     name: 'Quiz Master',
     icon: Brain,
     color: '#b026ff',
     route: '/quizitnow',
-    delay: 0.4
+    delay: 0.3
   },
   {
-    id: 5,
+    id: 4,
     name: 'Recipe Generator',
     icon: ChefHat,
     color: '#ff6b00',
     route: '/recipe-generator',
-    delay: 0.5
+    delay: 0.4
   },
   {
-    id: 6,
+    id: 5,
     name: 'OX Bull Cow',
     icon: Target,
     color: '#00d4ff',
     route: '/ox-bull-cow',
-    delay: 0.6
+    delay: 0.5
   }
 ]
 
