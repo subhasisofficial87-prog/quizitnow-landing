@@ -98,10 +98,36 @@ function Home() {
     setDarkMode(!darkMode)
   }
 
+  // Generate snowflakes
+  const snowflakes = Array.from({ length: 100 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    delay: Math.random() * 5,
+    duration: 10 + Math.random() * 10,
+    size: 2 + Math.random() * 8,
+    opacity: 0.3 + Math.random() * 0.7,
+    sway: Math.random() * 100
+  }))
+
   return (
     <div className="app">
       <div className="background">
-        <div className="grid-bg"></div>
+        <div className="snowfall">
+          {snowflakes.map((flake) => (
+            <div
+              key={flake.id}
+              className="snowflake"
+              style={{
+                left: `${flake.left}%`,
+                '--delay': `${flake.delay}s`,
+                '--duration': `${flake.duration}s`,
+                '--size': `${flake.size}px`,
+                '--opacity': flake.opacity,
+                '--sway': `${flake.sway}px`
+              }}
+            />
+          ))}
+        </div>
         <div className="glow-orb orb-1"></div>
         <div className="glow-orb orb-2"></div>
         <div className="glow-orb orb-3"></div>
