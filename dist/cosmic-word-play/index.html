@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmic Word Play - Coming Soon</title>
+    <title>Cosmic Word Play - Wordly</title>
     <style>
         * {
             margin: 0;
@@ -15,104 +15,31 @@
             background: linear-gradient(135deg, #0a0e27 0%, #0f1535 100%);
             min-height: 100vh;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #ffffff;
+            overflow-x: hidden;
         }
 
-        .container {
+        header {
+            padding: 20px;
             text-align: center;
-            padding: 40px;
-            max-width: 600px;
-        }
-
-        .icon {
-            font-size: 80px;
-            margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.2);
         }
 
         h1 {
-            font-size: 36px;
-            margin-bottom: 10px;
+            font-size: 32px;
             background: linear-gradient(135deg, #00ffff, #ff0080);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-
-        .subtitle {
-            font-size: 18px;
-            color: #b0b0b0;
-            margin-bottom: 30px;
-        }
-
-        .description {
-            font-size: 16px;
-            color: #888;
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #00ffff, #ff0080);
-            color: #0a0e27;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-size: 16px;
-        }
-
-        .button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
-        }
-
-        .status {
-            margin-top: 40px;
-            padding: 20px;
-            background: rgba(0, 255, 255, 0.1);
-            border-left: 4px solid #00ffff;
-            border-radius: 4px;
-            text-align: left;
-        }
-
-        .status-title {
-            color: #00ffff;
-            font-weight: bold;
             margin-bottom: 10px;
         }
 
-        .status-text {
-            color: #b0b0b0;
+        .subtitle {
             font-size: 14px;
-        }
-
-        .glow {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            background: #00ff00;
-            border-radius: 50%;
-            margin-right: 8px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            color: #00ffff;
+            opacity: 0.8;
         }
 
         .nav-back {
@@ -125,39 +52,757 @@
             align-items: center;
             gap: 5px;
             transition: all 0.3s ease;
+            font-size: 14px;
         }
 
         .nav-back:hover {
             transform: translateX(-5px);
+            color: #ff0080;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: #00ffff;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(5, 60px);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .guess-row {
+            display: contents;
+        }
+
+        .tile {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #00ffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            background: rgba(0, 255, 255, 0.1);
+            color: #ffffff;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .tile.filled {
+            border-color: #ff0080;
+            background: rgba(255, 0, 128, 0.2);
+        }
+
+        .tile.correct {
+            background: #00ff00;
+            color: #000000;
+            border-color: #00ff00;
+            transform: scale(1.05);
+        }
+
+        .tile.present {
+            background: #ffff00;
+            color: #000000;
+            border-color: #ffff00;
+            transform: scale(1.05);
+        }
+
+        .tile.absent {
+            background: #666666;
+            color: #ffffff;
+            border-color: #666666;
+            transform: scale(1.05);
+        }
+
+        .input-section {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 500px;
+        }
+
+        #guessInput {
+            padding: 12px 16px;
+            font-size: 16px;
+            border: 2px solid #00ffff;
+            background: rgba(0, 255, 255, 0.1);
+            color: #ffffff;
+            border-radius: 4px;
+            text-transform: uppercase;
+            min-width: 150px;
+        }
+
+        #guessInput:focus {
+            outline: none;
+            border-color: #ff0080;
+            background: rgba(255, 0, 128, 0.15);
+            box-shadow: 0 0 10px rgba(255, 0, 128, 0.3);
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00ffff, #ff0080);
+            color: #0a0e27;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            font-size: 18px;
+            min-height: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .message.error {
+            color: #ff6b6b;
+        }
+
+        .message.success {
+            color: #00ff00;
+        }
+
+        .message.info {
+            color: #00ffff;
+        }
+
+        .keyboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(35px, 1fr));
+            gap: 4px;
+            max-width: 500px;
+            margin-top: 20px;
+        }
+
+        .key {
+            padding: 8px 6px;
+            font-size: 12px;
+            background: rgba(0, 255, 255, 0.2);
+            border: 1px solid #00ffff;
+            color: #ffffff;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: bold;
+        }
+
+        .key:hover {
+            background: rgba(0, 255, 255, 0.4);
+        }
+
+        .key.correct {
+            background: #00ff00;
+            color: #000000;
+            border-color: #00ff00;
+        }
+
+        .key.present {
+            background: #ffff00;
+            color: #000000;
+            border-color: #ffff00;
+        }
+
+        .key.absent {
+            background: #666666;
+            color: #999999;
+            border-color: #666666;
+            opacity: 0.6;
+        }
+
+        .game-over {
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .word-reveal {
+            font-size: 32px;
+            font-weight: bold;
+            color: #00ffff;
+            margin: 20px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .attempts {
+            font-size: 14px;
+            color: #b0b0b0;
+            margin: 10px 0;
+        }
+
+        .hint {
+            font-size: 14px;
+            color: #ffff00;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .game-board {
+                grid-template-columns: repeat(5, 45px);
+                gap: 6px;
+            }
+
+            .tile {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
     <a href="/" class="nav-back">← Back to Home</a>
 
-    <div class="container">
-        <div class="icon">📚✨</div>
-        <h1>Cosmic Word Play</h1>
-        <p class="subtitle">Challenge Your Vocabulary</p>
-
-        <p class="description">
-            Explore the cosmos of words! Test your vocabulary skills, discover new words, and climb the leaderboard in this cosmic word-guessing adventure.
-        </p>
-
-        <button class="button" onclick="alert('This app is coming soon! Check back soon.')">
-            Learn More
-        </button>
-
-        <div class="status">
-            <div class="status-title">
-                <span class="glow"></span>Platform Status
+    <header>
+        <h1>🌌 Cosmic Word Play</h1>
+        <p class="subtitle">Challenge Your Vocabulary - Guess the Word in 6 Attempts!</p>
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="gamesWon">0</div>
+                <div>Won</div>
             </div>
-            <div class="status-text">
-                ✓ App is under development<br>
-                ✓ Coming to QuizItNow soon<br>
-                ✓ Check back shortly for launch
+            <div class="stat-item">
+                <div class="stat-value" id="gamesLost">0</div>
+                <div>Lost</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="streak">0</div>
+                <div>Streak</div>
             </div>
         </div>
+    </header>
+
+    <div class="container">
+        <div id="gameBoard" class="game-board"></div>
+
+        <div class="message" id="message"></div>
+
+        <div class="input-section">
+            <input
+                type="text"
+                id="guessInput"
+                placeholder="Enter 5-letter word"
+                maxlength="5"
+                autocomplete="off"
+            >
+            <button id="submitBtn" onclick="submitGuess()">Guess</button>
+            <button id="newGameBtn" onclick="initializeGame()" style="display:none;">New Game</button>
+        </div>
+
+        <div class="hint" id="hint"></div>
+
+        <div class="keyboard" id="keyboard"></div>
     </div>
+
+    <script>
+        // Word list for the game
+        const WORD_LIST = [
+            'ABOUT', 'ABOVE', 'ABUSE', 'ACUTE', 'ADMIT', 'ADOPT', 'ADULT', 'AFTER', 'AGAIN', 'AGENT',
+            'AGREE', 'AHEAD', 'ALARM', 'ALBUM', 'ALERT', 'ALIKE', 'ALIVE', 'ALLOW', 'ALONE', 'ALONG',
+            'ALTER', 'AMBER', 'AMEND', 'ANGEL', 'ANGER', 'ANGLE', 'ANGRY', 'APART', 'APPLE', 'APPLY',
+            'ARENA', 'ARGUE', 'ARISE', 'ARMOR', 'ARRAY', 'ARROW', 'ASIDE', 'ASSET', 'AVOID', 'AWAKE',
+            'AWARD', 'AWARE', 'BADLY', 'BADGE', 'BAKER', 'BASES', 'BASIC', 'BASIS', 'BEACH', 'BEGAN',
+            'BEGIN', 'BEING', 'BELOW', 'BENCH', 'BILLY', 'BIRTH', 'BLACK', 'BLADE', 'BLAME', 'BLANK',
+            'BLAST', 'BLEED', 'BLESS', 'BLIND', 'BLOCK', 'BLOOD', 'BOARD', 'BOOST', 'BOOTH', 'BOUND',
+            'BRAIN', 'BRAND', 'BRAVE', 'BREAD', 'BREAK', 'BREED', 'BRICK', 'BRIDE', 'BRIEF', 'BRING',
+            'BRINK', 'BROAD', 'BROKE', 'BROWN', 'BUILD', 'BUILT', 'BURST', 'CABIN', 'CABLE', 'CALIF',
+            'CAMEL', 'CANAL', 'CANDY', 'CANOE', 'CARED', 'CARGO', 'CAROL', 'CARRY', 'CARVE', 'CATCH',
+            'CAUSE', 'CHAIN', 'CHAIR', 'CHALK', 'CHAMP', 'CHANT', 'CHAOS', 'CHARM', 'CHART', 'CHASE',
+            'CHEAP', 'CHEAT', 'CHECK', 'CHEEK', 'CHEER', 'CHESS', 'CHEST', 'CHIEF', 'CHILD', 'CHILL',
+            'CHINA', 'CHOSE', 'CHUNK', 'CLAIM', 'CLAMP', 'CLASH', 'CLASS', 'CLEAN', 'CLEAR', 'CLICK',
+            'CLIFF', 'CLIMB', 'CLOAK', 'CLOCK', 'CLOSE', 'CLOTH', 'CLOUD', 'COACH', 'COAST', 'COCOA',
+            'COLON', 'COLOR', 'COMES', 'COMET', 'COMIC', 'CORAL', 'COUGH', 'COULD', 'COUNT', 'COURT',
+            'COVER', 'CRACK', 'CRAFT', 'CRASH', 'CRATE', 'CRAVE', 'CRAWL', 'CRAZY', 'CREAM', 'CREED',
+            'CREEK', 'CREEP', 'CRIME', 'CRISP', 'CROOK', 'CROSS', 'CROWD', 'CROWN', 'CRUDE', 'CRUEL',
+            'CRUSH', 'CURVE', 'CYCLE', 'DAILY', 'DAIRY', 'DAISY', 'DANCE', 'DATED', 'DEALT', 'DEATH',
+            'DEBUT', 'DECAY', 'DECOR', 'DECOY', 'DEITY', 'DELAY', 'DELTA', 'DENSE', 'DEPTH', 'DERBY',
+            'DETER', 'DETOX', 'DIARY', 'DIGIT', 'DINED', 'DINER', 'DIRTY', 'DISCO', 'DITCH', 'DIVER',
+            'DIVVY', 'DIZZY', 'DOCKS', 'DODGE', 'DOING', 'DOMED', 'DONOR', 'DOORS', 'DOUBT', 'DOUGH',
+            'DOVER', 'DRAFT', 'DRAIN', 'DRAKE', 'DRANK', 'DRAWN', 'DREAD', 'DREAM', 'DRESS', 'DRIED',
+            'DRIFT', 'DRILL', 'DRINK', 'DRIVE', 'DROIT', 'DRONE', 'DROOP', 'DROSS', 'DROVE', 'DROWN',
+            'DYING', 'EAGER', 'EAGLE', 'EARLY', 'EARTH', 'EASEL', 'EASED', 'EATER', 'EAVES', 'EBBED',
+            'EDGED', 'EDGES', 'EDICT', 'EGGED', 'EGGAD', 'EIDER', 'EIGHT', 'EJECT', 'ELATE', 'ELDER',
+            'ELECT', 'ELEGY', 'ELEND', 'ELIDE', 'ELITE', 'ELOPE', 'ELUDE', 'EMBED', 'EMBER', 'EMCEE',
+            'EMERY', 'EMOJI', 'EMPTY', 'ENACT', 'ENDED', 'ENDOW', 'ENEMY', 'ENJOY', 'ENNUI', 'ENSUE',
+            'ENTER', 'ENTRY', 'ENVOY', 'EPOCH', 'EQUAL', 'EQUIP', 'ERASE', 'ERECT', 'ERROR', 'ERUPT',
+            'ESSAY', 'ESTER', 'ETHER', 'ETHIC', 'EVENT', 'EVERY', 'EVICT', 'EVOKE', 'EXACT', 'EXALT',
+            'EXAMS', 'EXCEL', 'EXECS', 'EXERT', 'EXILE', 'EXIST', 'EXITS', 'EXPAT', 'EXPEL', 'EXTOL',
+            'EXTRA', 'EXUDE', 'EXULT', 'EYING', 'FABLE', 'FACED', 'FACET', 'FACTS', 'FADE', 'FADED',
+            'FADES', 'FAILS', 'FAINT', 'FAIRY', 'FAITH', 'FALSE', 'FAMED', 'FANCY', 'FARCE', 'FARED',
+            'FARES', 'FARMS', 'FATAL', 'FATED', 'FATTY', 'FAULT', 'FAUNA', 'FAVOR', 'FEAST', 'FEATS',
+            'FELON', 'FENCE', 'FERNS', 'FERRY', 'FETAL', 'FETCH', 'FEVER', 'FIBER', 'FIELD', 'FIEND',
+            'FIERY', 'FIFTH', 'FIFTY', 'FIGHT', 'FILED', 'FILES', 'FILER', 'FILLS', 'FILMS', 'FILMY',
+            'FILTER', 'FINAL', 'FINCH', 'FINDS', 'FINED', 'FINES', 'FIRED', 'FIRES', 'FIRST', 'FIRTH',
+            'FISH', 'FISTS', 'FITLY', 'FIXED', 'FIXER', 'FIXES', 'FJORD', 'FLACK', 'FLAGS', 'FLAIL',
+            'FLAIR', 'FLAKE', 'FLAKY', 'FLAME', 'FLANK', 'FLAPS', 'FLARE', 'FLASH', 'FLASK', 'FLATS',
+            'FLAWS', 'FLEAS', 'FLECK', 'FLEES', 'FLEET', 'FLESH', 'FLICK', 'FLIES', 'FLIGHT', 'FLING',
+            'FLINT', 'FLIPS', 'FLIRT', 'FLOAT', 'FLOCK', 'FLOOD', 'FLOOR', 'FLOPS', 'FLORA', 'FLOSS',
+            'FLOUR', 'FLOWS', 'FLUID', 'FLUKE', 'FLUNG', 'FLUSH', 'FLUTE', 'FOAMS', 'FOAMY', 'FOCAL',
+            'FOCUS', 'FOGGY', 'FOILS', 'FOIST', 'FOLLY', 'FONTS', 'FOODS', 'FOOLS', 'FORAY', 'FORCE',
+            'FORD', 'FORDS', 'FORGE', 'FORGO', 'FORKS', 'FORMS', 'FORTE', 'FORTH', 'FORTY', 'FORUM',
+            'FOSSIL', 'FOYER', 'FRAIL', 'FRAME', 'FRANK', 'FRAUD', 'FRAYS', 'FREAK', 'FREED', 'FREER',
+            'FREES', 'FRESH', 'FRETS', 'FRIAR', 'FRIED', 'FRIES', 'FRILL', 'FRISK', 'FROCK', 'FROGS',
+            'FRONT', 'FROST', 'FROTH', 'FROWN', 'FROZE', 'FRUIT', 'FRYER', 'FUELS', 'FULLY', 'FUMED',
+            'FUMES', 'FUNDS', 'FUNGI', 'FUNKS', 'FUNKY', 'FUNNY', 'FUSSY', 'FUZZY', 'GAILY', 'GAINS',
+            'GALES', 'GALLS', 'GAMES', 'GANGS', 'GAPES', 'GAPPY', 'GARBS', 'GATED', 'GATES', 'GAUGE',
+            'GAUNT', 'GAUZE', 'GAUZY', 'GAVEL', 'GAWKS', 'GAWKY', 'GAZER', 'GAZES', 'GEARS', 'GEESE',
+            'GENES', 'GENRE', 'GENTS', 'GENUS', 'GERMY', 'GHOST', 'GIANT', 'GIDDY', 'GIFTS', 'GILLS',
+            'GILTS', 'GIRTH', 'GLAND', 'GLARE', 'GLASS', 'GLAZE', 'GLEAM', 'GLEAN', 'GLIDE', 'GLINT',
+            'GLITZ', 'GLOAT', 'GLOBE', 'GLOOM', 'GLOOMY', 'GLORY', 'GLOSS', 'GLOVE', 'GLUES', 'GLUEY',
+            'GLUED', 'GLUTS', 'GLYPH', 'GNASH', 'GNATS', 'GNOME', 'GOALS', 'GOATS', 'GODLY', 'GOING',
+            'GOLDS', 'GOLFS', 'GOMEZ', 'GONAD', 'GONER', 'GONGS', 'GONNA', 'GOODS', 'GOODY', 'GOOEY',
+            'GOOFY', 'GOONS', 'GOOSE', 'GORED', 'GORES', 'GORGE', 'GORGY', 'GORSE', 'GOUGE', 'GOURD',
+            'GRACE', 'GRADE', 'GRAFT', 'GRAIN', 'GRAND', 'GRANT', 'GRAPE', 'GRAPH', 'GRASP', 'GRASS',
+            'GRATE', 'GRAVE', 'GRAVY', 'GRAZE', 'GREAT', 'GREED', 'GREEK', 'GREEN', 'GREET', 'GREYS',
+            'GRIEF', 'GRILL', 'GRIME', 'GRIMY', 'GRIND', 'GRINS', 'GRIPS', 'GRIST', 'GRITS', 'GROAN',
+            'GROAT', 'GROIN', 'GROOM', 'GROPE', 'GROSS', 'GROUP', 'GROUT', 'GROVE', 'GROWL', 'GROWN',
+            'GROWS', 'GRUBS', 'GRUNT', 'GUANO', 'GUARD', 'GUAVA', 'GUESS', 'GUEST', 'GUIDE', 'GUILD',
+            'GUILE', 'GUILT', 'GUISE', 'GULCH', 'GULFS', 'GULLS', 'GULPY', 'GUMMY', 'GUNKY', 'GURUS',
+            'GUSTS', 'GUSTY', 'GUTTA', 'GUTTY', 'GUYED', 'GUZZLE', 'GYMS', 'GYPSY', 'GYRAL', 'GYRATE',
+            'HABIT', 'HACKS', 'HADNT', 'HAIKU', 'HAILS', 'HAIRS', 'HAIRY', 'HAITI', 'HALED', 'HALES',
+            'HALTS', 'HALVE', 'HAMES', 'HAMMY', 'HANDS', 'HANDY', 'HANGS', 'HANKY', 'HANSE', 'HAPPY',
+            'HARDY', 'HAREM', 'HARES', 'HARKS', 'HARMS', 'HARPS', 'HARPY', 'HARRY', 'HARSH', 'HARTS',
+            'HASH', 'HASPS', 'HASTE', 'HASTY', 'HATED', 'HATER', 'HATES', 'HAULS', 'HAUNT', 'HAVEN',
+            'HAVOC', 'HAWKS', 'HAWSE', 'HAZED', 'HAZEL', 'HAZER', 'HAZES', 'HEADS', 'HEADY', 'HEALS',
+            'HEAPS', 'HEARD', 'HEARS', 'HEART', 'HEATS', 'HEATH', 'HEAVE', 'HEAVY', 'HECKS', 'HEDGE',
+            'HEEDS', 'HEELS', 'HEFTS', 'HEFTY', 'HEIRS', 'HEIST', 'HELIX', 'HELLO', 'HELM', 'HELMS',
+            'HELPS', 'HENCE', 'HENNA', 'HENRY', 'HERDS', 'HERON', 'HERTZ', 'HEWED', 'HEWER', 'HEXED',
+            'HEXES', 'HGGED', 'HICKS', 'HIDES', 'HIGHS', 'HIJAB', 'HIJACK', 'HIKES', 'HILAR', 'HILAR',
+            'HILLS', 'HILTS', 'HIMBO', 'HINDS', 'HINGE', 'HINTS', 'HIPPO', 'HIRED', 'HIRES', 'HISSY',
+            'HITCH', 'HIVED', 'HIVES', 'HOAGY', 'HOAMS', 'HOARD', 'HOARS', 'HOARY', 'HOBBY', 'HOCKS',
+            'HODGE', 'HOGAN', 'HOIST', 'HOKUM', 'HOLDS', 'HOLES', 'HOLED', 'HOLEY', 'HOLOS', 'HOLLY',
+            'HOLM', 'HOLMS', 'HOLST', 'HOLT', 'HOLTS', 'HOMED', 'HOMER', 'HOMES', 'HOMY', 'HONED',
+            'HONER', 'HONES', 'HONKS', 'HONOR', 'HOODS', 'HOODY', 'HOOFS', 'HOOKS', 'HOOKY', 'HOOPS',
+            'HOOTS', 'HOPED', 'HOPES', 'HOPPED', 'HOPPER', 'HOPPY', 'HORAH', 'HORDE', 'HORNS', 'HORNY',
+            'HORSE', 'HOSES', 'HOSTA', 'HOTLY', 'HOUND', 'HOURS', 'HOUSE', 'HOVEL', 'HOVER', 'HOWDY',
+            'HOWDY', 'HOUND', 'HOVED', 'HOVED', 'HOVEN', 'HOVER', 'HOWDY', 'HOWDY', 'HOWDY', 'HOWDY'
+        ];
+
+        const HINTS = {
+            'ABOUT': 'Approximately',
+            'ABOVE': 'Higher than',
+            'HOUSE': 'Where you live',
+            'BEACH': 'Sandy shore',
+            'BREAD': 'Baked food',
+            'BRAIN': 'Thinking organ',
+            'CHAIR': 'Furniture to sit on',
+            'DANCE': 'Moving to music',
+            'DREAM': 'What you see while sleeping',
+            'EARTH': 'Our planet',
+            'FIELD': 'Open land',
+            'GIANT': 'Very tall person',
+            'GHOST': 'Supernatural spirit',
+            'GRAPE': 'Purple fruit',
+            'GRASS': 'Green lawn',
+            'HEART': 'Pumps blood',
+            'HOUSE': 'Building to live in',
+            'JUDGE': 'Court official',
+            'KEYBOARD': 'Computer input',
+            'LEMON': 'Sour citrus fruit',
+            'LIGHT': 'Opposite of dark',
+            'MAGIC': 'Supernatural tricks',
+            'MOUSE': 'Computer device',
+            'MUSIC': 'Organized sounds',
+            'NIGHT': 'Time of darkness',
+            'OCEAN': 'Large body of water',
+            'PEACE': 'Absence of war',
+            'PIANO': 'Musical instrument',
+            'PLANT': 'Living vegetation',
+            'QUILT': 'Bed cover',
+            'RAPID': 'Fast moving',
+            'RIGHT': 'Correct or direction',
+            'SMILE': 'Happy expression',
+            'SNAKE': 'Slithering reptile',
+            'SPACE': 'Outer area',
+            'SPEED': 'Rate of motion',
+            'SPORT': 'Physical activity',
+            'STAND': 'Upright position',
+            'STONE': 'Hard rock',
+            'STORM': 'Bad weather',
+            'STORY': 'Narrative tale',
+            'SUGAR': 'Sweet substance',
+            'SUMMER': 'Warm season',
+            'SUNNY': 'Bright with sun',
+            'SWAMP': 'Marshy area',
+            'SWEET': 'Sugar-like taste',
+            'TABLE': 'Furniture for eating',
+            'THEME': 'Main idea',
+            'THINK': 'Use your mind',
+            'TIDAL': 'Related to tides',
+            'TIGER': 'Striped big cat',
+            'TOKEN': 'Symbol or sign',
+            'TOTAL': 'Complete sum',
+            'TOUCH': 'Feel with hands',
+            'TOUGH': 'Hard or difficult',
+            'TOWEL': 'For drying',
+            'TOWER': 'Tall structure',
+            'TRACK': 'Path or trail',
+            'TRADE': 'Exchange goods',
+            'TRAIL': 'Path through nature',
+            'TRAIN': 'Rail transport',
+            'TRASH': 'Garbage',
+            'TREAT': 'Special reward',
+            'TREND': 'General tendency',
+            'TRIAL': 'Court hearing',
+            'TRIBE': 'Group of people',
+            'TRICK': 'Clever deception',
+            'TRIED': 'Attempted',
+            'TRIES': 'Attempts',
+            'TROUT': 'Type of fish',
+            'TRUCK': 'Large vehicle',
+            'TRULY': 'In truth',
+            'TRUMP': 'Card game',
+            'TRUNK': 'Tree base',
+            'TRUST': 'Believe in',
+            'TRUTH': 'Actual fact',
+            'TULIP': 'Spring flower',
+            'TUNED': 'Adjusted',
+            'TUNIC': 'Clothing type',
+            'TURBO': 'High speed',
+            'TURNS': 'Rotations',
+            'TUTOR': 'Teacher',
+            'TWEED': 'Fabric type',
+            'TWEET': 'Bird sound',
+            'TWICE': 'Two times',
+            'TWIGS': 'Small branches',
+            'TWINS': 'Two siblings',
+            'TWIRL': 'Spin around',
+            'TWIST': 'Turn and wind',
+            'TYPED': 'Used keyboard',
+            'TYPOS': 'Typing errors',
+            'ULTRA': 'Extreme or beyond',
+            'UMBER': 'Brown color',
+            'UMPIRE': 'Sports official',
+            'UNABLE': 'Cannot do',
+            'UNAWARE': 'Not knowing',
+            'UNCLE': 'Parent\'s brother',
+            'UNDER': 'Below position',
+            'UNDO': 'Reverse action',
+            'UNEVEN': 'Not level',
+            'UNFAIR': 'Not just',
+            'UNIT': 'Single thing',
+            'UNITED': 'Joined together',
+            'UNITY': 'Being one',
+            'UNTIL': 'Up to that point',
+            'UPLOAD': 'Send data up',
+            'UPON': 'On top of',
+            'UPPER': 'Higher part',
+            'UPSET': 'Distressed',
+            'URBAN': 'City related',
+            'URGED': 'Strongly advised',
+            'URGENT': 'Needing quick action',
+            'USAGE': 'Way of using',
+            'USHER': 'Guide in',
+            'USUAL': 'Common or typical',
+            'USEFUL': 'Having purpose',
+            'USELESS': 'No value',
+            'UTTER': 'Speak or complete',
+            'VACATION': 'Holiday trip',
+            'VACANT': 'Empty space',
+            'VACUUM': 'Empty space',
+            'VAGUE': 'Unclear',
+            'VALID': 'Correct or sound',
+            'VALLEY': 'Low land',
+            'VALOR': 'Courage',
+            'VALUE': 'Worth or importance',
+            'VALUED': 'Highly regarded',
+            'VALVE': 'Flow control',
+            'VANISH': 'Disappear',
+            'VAPOR': 'Gas form',
+            'VARIED': 'Different types',
+            'VAULT': 'Secure room',
+            'VEGAN': 'No animal products',
+            'VEHICLE': 'Mode of transport',
+            'VEIL': 'Face covering',
+            'VEINS': 'Blood vessels',
+            'VENOM': 'Poison',
+            'VENUE': 'Meeting place',
+            'VERGE': 'Edge or brink',
+            'VERIFY': 'Confirm truth',
+            'VERSE': 'Poetry line',
+            'VERSUS': 'Against',
+            'VESSEL': 'Container',
+            'VESTAL': 'Pure',
+            'VESTED': 'Invested',
+            'VETERAN': 'Experienced person',
+            'VETO': 'Reject',
+            'VIABLE': 'Workable',
+            'VIAND': 'Food item',
+            'VIALS': 'Small bottles',
+            'VIBES': 'Feelings',
+            'VICAR': 'Clergy member',
+            'VICES': 'Bad habits',
+            'VICTIM': 'Sufferer',
+            'VICTORY': 'Winning',
+            'VIDEO': 'Recorded image',
+            'VIEWS': 'Opinions',
+            'VIGIL': 'Watch over',
+            'VIGOR': 'Energy',
+            'VILLA': 'Large house',
+            'VILLAN': 'Bad character',
+            'VINE': 'Climbing plant',
+            'VINES': 'Plant tendrils',
+            'VINYL': 'Plastic material',
+            'VIOLA': 'Musical instrument',
+            'VIOLIN': 'String instrument',
+            'VIRAL': 'Spread widely',
+            'VIRGIN': 'Never touched',
+            'VIRUS': 'Infectious agent',
+            'VISAGE': 'Face',
+            'VISION': 'Sight or dream',
+            'VISIT': 'Call on',
+            'VISOR': 'Brim',
+            'VISTA': 'View',
+            'VISUAL': 'Sight related',
+            'VITAL': 'Essential',
+            'VIVID': 'Bright colors',
+            'VOCAL': 'Voice related',
+            'VODKA': 'Alcoholic drink',
+            'VOICE': 'Speech sounds',
+            'VOID': 'Empty space',
+            'VOUCH': 'Support',
+            'VOWEL': 'Letter type',
+            'VOWED': 'Made promise',
+            'VOWELS': 'Letter types',
+            'VOYAGE': 'Long journey'
+        };
+
+        let secretWord = '';
+        let currentRow = 0;
+        let gameOver = false;
+        let guesses = [];
+        let keyStatuses = {};
+        let gamesWon = 0;
+        let gamesLost = 0;
+        let streak = 0;
+
+        const ROWS = 6;
+        const COLS = 5;
+
+        // Load stats from localStorage
+        function loadStats() {
+            gamesWon = parseInt(localStorage.getItem('gamesWon') || '0');
+            gamesLost = parseInt(localStorage.getItem('gamesLost') || '0');
+            streak = parseInt(localStorage.getItem('streak') || '0');
+            updateStatsDisplay();
+        }
+
+        // Save stats to localStorage
+        function saveStats() {
+            localStorage.setItem('gamesWon', gamesWon);
+            localStorage.setItem('gamesLost', gamesLost);
+            localStorage.setItem('streak', streak);
+            updateStatsDisplay();
+        }
+
+        // Update stats display
+        function updateStatsDisplay() {
+            document.getElementById('gamesWon').textContent = gamesWon;
+            document.getElementById('gamesLost').textContent = gamesLost;
+            document.getElementById('streak').textContent = streak;
+        }
+
+        // Initialize the game
+        function initializeGame() {
+            secretWord = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)];
+            currentRow = 0;
+            gameOver = false;
+            guesses = [];
+            keyStatuses = {};
+
+            document.getElementById('message').textContent = '';
+            document.getElementById('hint').textContent = `Hint: ${HINTS[secretWord] || 'Guess the word!'}`;
+            document.getElementById('guessInput').value = '';
+            document.getElementById('guessInput').disabled = false;
+            document.getElementById('submitBtn').style.display = 'inline-block';
+            document.getElementById('newGameBtn').style.display = 'none';
+            document.getElementById('guessInput').focus();
+
+            renderBoard();
+            renderKeyboard();
+        }
+
+        // Render the game board
+        function renderBoard() {
+            const board = document.getElementById('gameBoard');
+            board.innerHTML = '';
+
+            for (let row = 0; row < ROWS; row++) {
+                for (let col = 0; col < COLS; col++) {
+                    const tile = document.createElement('div');
+                    tile.className = 'tile';
+
+                    if (row < guesses.length) {
+                        const letter = guesses[row][col];
+                        tile.textContent = letter;
+                        tile.classList.add('filled');
+
+                        if (secretWord[col] === letter) {
+                            tile.classList.add('correct');
+                        } else if (secretWord.includes(letter)) {
+                            tile.classList.add('present');
+                        } else {
+                            tile.classList.add('absent');
+                        }
+                    }
+
+                    board.appendChild(tile);
+                }
+            }
+        }
+
+        // Render keyboard
+        function renderKeyboard() {
+            const keyboard = document.getElementById('keyboard');
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+            keyboard.innerHTML = '';
+            alphabet.forEach(letter => {
+                const key = document.createElement('button');
+                key.textContent = letter;
+                key.className = 'key';
+
+                if (keyStatuses[letter]) {
+                    key.classList.add(keyStatuses[letter]);
+                }
+
+                key.onclick = () => {
+                    if (!gameOver) {
+                        document.getElementById('guessInput').value += letter;
+                        document.getElementById('guessInput').focus();
+                    }
+                };
+
+                keyboard.appendChild(key);
+            });
+        }
+
+        // Submit a guess
+        function submitGuess() {
+            const input = document.getElementById('guessInput').value.toUpperCase();
+            const message = document.getElementById('message');
+
+            if (input.length !== COLS) {
+                message.textContent = 'Word must be 5 letters!';
+                message.className = 'message error';
+                return;
+            }
+
+            if (!WORD_LIST.includes(input)) {
+                message.textContent = 'Not a valid word!';
+                message.className = 'message error';
+                return;
+            }
+
+            guesses.push(input);
+            currentRow++;
+            document.getElementById('guessInput').value = '';
+
+            // Update key statuses
+            for (let i = 0; i < COLS; i++) {
+                const letter = input[i];
+                if (secretWord[i] === letter) {
+                    keyStatuses[letter] = 'correct';
+                } else if (secretWord.includes(letter) && keyStatuses[letter] !== 'correct') {
+                    keyStatuses[letter] = 'present';
+                } else if (!keyStatuses[letter]) {
+                    keyStatuses[letter] = 'absent';
+                }
+            }
+
+            renderBoard();
+            renderKeyboard();
+
+            // Check win condition
+            if (input === secretWord) {
+                message.textContent = '🎉 You won! Amazing!';
+                message.className = 'message success';
+                gameOver = true;
+                gamesWon++;
+                streak++;
+                saveStats();
+                document.getElementById('guessInput').disabled = true;
+                document.getElementById('submitBtn').style.display = 'none';
+                document.getElementById('newGameBtn').style.display = 'inline-block';
+                return;
+            }
+
+            // Check loss condition
+            if (currentRow >= ROWS) {
+                message.textContent = `Game Over! The word was: ${secretWord}`;
+                message.className = 'message error';
+                gameOver = true;
+                gamesLost++;
+                streak = 0;
+                saveStats();
+                document.getElementById('guessInput').disabled = true;
+                document.getElementById('submitBtn').style.display = 'none';
+                document.getElementById('newGameBtn').style.display = 'inline-block';
+                return;
+            }
+
+            message.textContent = `Attempt ${currentRow}/${ROWS}`;
+            message.className = 'message info';
+        }
+
+        // Handle Enter key
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('guessInput').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    submitGuess();
+                }
+            });
+
+            loadStats();
+            initializeGame();
+        });
+    </script>
 </body>
 </html>
