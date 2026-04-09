@@ -82,6 +82,49 @@
   }
 }
 
+@keyframes buttonShine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes buttonGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--color),
+                inset 0 0 20px rgba(var(--rgb-color), 0.1),
+                0 0 40px rgba(var(--rgb-color), 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--color),
+                inset 0 0 40px rgba(var(--rgb-color), 0.2),
+                0 0 80px rgba(var(--rgb-color), 0.6);
+  }
+}
+
+@keyframes iconBounce {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(10deg);
+  }
+}
+
+@keyframes backgroundFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 /* ============================================
    LAYOUT & STRUCTURE
    ============================================ */
@@ -243,22 +286,29 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.5s ease;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: 16px;
+  z-index: 1;
 }
 
 .app-button:hover::before {
   left: 100%;
+  animation: buttonShine 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .app-button:hover {
   border-color: var(--color);
-  box-shadow:
-    0 0 30px var(--color),
-    inset 0 0 30px rgba(var(--rgb-color), 0.1),
-    0 0 60px var(--color);
-  transform: translateY(-8px) scale(1.05);
-  background: linear-gradient(135deg, rgba(var(--rgb-color), 0.1), rgba(var(--rgb-color), 0.05));
+  transform: translateY(-12px) scale(1.08);
+  animation: buttonGlowPulse 1.5s ease-in-out infinite;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--rgb-color), 0.25),
+    rgba(var(--rgb-color), 0.15),
+    rgba(var(--rgb-color), 0.1)
+  );
+  background-size: 200% 200%;
+  animation: buttonGlowPulse 1.5s ease-in-out infinite, backgroundFlow 3s ease-in-out infinite;
 }
 
 .app-button:active {
@@ -289,14 +339,16 @@
 }
 
 .app-button:hover .button-icon {
-  background: var(--color);
+  background: linear-gradient(135deg, var(--color), rgba(var(--rgb-color), 0.8));
   color: #0a0e27;
-  box-shadow: 0 0 25px var(--color);
-  transform: scale(1.15) rotate(-5deg);
+  box-shadow: 0 0 35px var(--color), inset 0 0 20px rgba(255, 255, 255, 0.3);
+  animation: iconBounce 0.8s ease-in-out infinite;
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
 .app-button:hover .button-icon svg {
-  animation: rotateBorder 0.6s ease-out;
+  animation: iconBounce 0.8s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
 }
 
 .button-text {
@@ -312,21 +364,24 @@
 
 .app-button:hover .button-text {
   color: var(--color);
-  text-shadow: 0 0 15px var(--color);
+  text-shadow: 0 0 20px var(--color), 0 0 40px rgba(var(--rgb-color), 0.6);
   font-weight: 800;
+  letter-spacing: 1.5px;
+  transform: scale(1.05);
 }
 
 .button-glow {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at center, rgba(var(--rgb-color), 0.15), transparent);
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: radial-gradient(circle at center, rgba(var(--rgb-color), 0.3), transparent);
   border-radius: 16px;
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
+  filter: blur(8px);
 }
 
 .app-button:hover .button-glow {
