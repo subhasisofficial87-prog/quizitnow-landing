@@ -460,6 +460,34 @@
   opacity: 0.7;
 }
 
+.footer-links {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.footer-link {
+  color: #00ffff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.footer-link:hover {
+  color: #ff0080;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  transform: scale(1.05);
+}
+
+.footer-separator {
+  color: rgba(0, 255, 255, 0.3);
+  font-size: 1.2rem;
+}
+
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */

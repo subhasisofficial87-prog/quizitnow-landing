@@ -177,6 +177,13 @@ function Home() {
         <footer className="footer">
           <p>Click any button to explore amazing quiz and game experiences</p>
           <p className="footer-sub">Built with Cortex 🧠     Powered by Vortex 🕳️</p>
+          <div className="footer-links">
+            <a href="/terms" className="footer-link">Terms of Service</a>
+            <span className="footer-separator">•</span>
+            <a href="/privacy" className="footer-link">Privacy Policy</a>
+            <span className="footer-separator">•</span>
+            <a href="mailto:hello@quizitnow.com" className="footer-link">Support: hello@quizitnow.com</a>
+          </div>
         </footer>
       </div>
     </div>
