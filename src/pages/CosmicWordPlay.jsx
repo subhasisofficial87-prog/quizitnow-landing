@@ -15,7 +15,7 @@ function CosmicWordPlay() {
       </div>
       <div className="game-container-full">
         <iframe
-          src="https://quizitnow.com/cosmic-word-play"
+          src="https://subhasisofficial87-prog.github.io/cosmic-word-play-4dd7f5b1/"
           title="Cosmic Word Play"
           style={{
             width: '100%',
