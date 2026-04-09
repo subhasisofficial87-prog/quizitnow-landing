@@ -15,7 +15,7 @@ const apps = [
     name: 'Cosmic Word Play',
     icon: Zap,
     color: '#00ffff',
-    route: '/cosmic-word-play/',
+    route: 'https://github.com/subhasisofficial87-prog/cosmic-word-play-4dd7f5b1',
     delay: 0.1
   },
   {
@@ -23,7 +23,7 @@ const apps = [
     name: 'Zoomable Earth',
     icon: Globe,
     color: '#00ff88',
-    route: '/zoomable-earth/',
+    route: 'https://github.com/subhasisofficial87-prog/zoomable-earth',
     delay: 0.2
   },
   {
@@ -31,7 +31,7 @@ const apps = [
     name: 'Guess My Neon',
     icon: Gamepad2,
     color: '#ff0080',
-    route: '/guess-my-neon/',
+    route: 'https://github.com/subhasisofficial87-prog/guess-my-neon',
     delay: 0.3
   },
   {
@@ -39,7 +39,7 @@ const apps = [
     name: 'QuizItNow',
     icon: Brain,
     color: '#b026ff',
-    route: '/quizitnow/',
+    route: 'https://github.com/subhasisofficial87-prog/mindsnapailabs',
     delay: 0.4
   },
   {
@@ -47,7 +47,7 @@ const apps = [
     name: 'Recipe Generator',
     icon: ChefHat,
     color: '#ff6b00',
-    route: '/recipe-generator/',
+    route: 'https://github.com/subhasisofficial87-prog/recipe-generator',
     delay: 0.5
   },
   {
@@ -55,7 +55,7 @@ const apps = [
     name: 'OX Bull Cow',
     icon: Target,
     color: '#00d4ff',
-    route: '/ox-bull-cow/',
+    route: 'https://github.com/subhasisofficial87-prog/guess-bullseye-link',
     delay: 0.6
   }
 ]
