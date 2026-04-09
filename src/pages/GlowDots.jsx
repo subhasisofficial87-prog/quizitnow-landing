@@ -202,28 +202,44 @@ function GlowDots() {
               const x2 = x1 + dotSpacing
 
               return (
-                <line
-                  key={`h-line-${row}-${col}`}
-                  x1={x1}
-                  y1={y1}
-                  x2={x2}
-                  y2={y1}
-                  stroke={themeData.lineColor}
-                  strokeWidth={horizontalLineStates[index] ? 4 : 2}
-                  opacity={horizontalLineStates[index] ? 1 : 0.3}
-                  className={`game-line h-line ${
-                    hoveredLine === `h-${row}-${col}` ? 'hovered' : ''
-                  }`}
-                  onClick={() => handleLineClick('h', row, col)}
-                  onMouseEnter={() =>
-                    !horizontalLineStates[index] && setHoveredLine(`h-${row}-${col}`)
-                  }
-                  onMouseLeave={() => setHoveredLine(null)}
-                  style={{
-                    cursor: horizontalLineStates[index] ? 'default' : 'pointer',
-                    filter: hoveredLine === `h-${row}-${col}` ? `drop-shadow(0 0 8px ${themeData.lineGlow})` : 'none'
-                  }}
-                />
+                <g key={`h-line-${row}-${col}`}>
+                  {/* Invisible clickable area (large stroke) */}
+                  <line
+                    x1={x1}
+                    y1={y1}
+                    x2={x2}
+                    y2={y1}
+                    stroke="transparent"
+                    strokeWidth={24}
+                    className="line-clickable"
+                    onClick={() => handleLineClick('h', row, col)}
+                    onMouseEnter={() =>
+                      !horizontalLineStates[index] && setHoveredLine(`h-${row}-${col}`)
+                    }
+                    onMouseLeave={() => setHoveredLine(null)}
+                    style={{
+                      cursor: horizontalLineStates[index] ? 'default' : 'pointer',
+                      pointerEvents: 'auto'
+                    }}
+                  />
+                  {/* Visible line */}
+                  <line
+                    x1={x1}
+                    y1={y1}
+                    x2={x2}
+                    y2={y1}
+                    stroke={themeData.lineColor}
+                    strokeWidth={horizontalLineStates[index] ? 4 : 2}
+                    opacity={horizontalLineStates[index] ? 1 : 0.3}
+                    className={`game-line h-line ${
+                      hoveredLine === `h-${row}-${col}` ? 'hovered' : ''
+                    }`}
+                    pointerEvents="none"
+                    style={{
+                      filter: hoveredLine === `h-${row}-${col}` ? `drop-shadow(0 0 8px ${themeData.lineGlow})` : 'none'
+                    }}
+                  />
+                </g>
               )
             })
           )}
@@ -237,28 +253,44 @@ function GlowDots() {
               const y2 = y1 + dotSpacing
 
               return (
-                <line
-                  key={`v-line-${row}-${col}`}
-                  x1={x1}
-                  y1={y1}
-                  x2={x1}
-                  y2={y2}
-                  stroke={themeData.lineColor}
-                  strokeWidth={verticalLineStates[index] ? 4 : 2}
-                  opacity={verticalLineStates[index] ? 1 : 0.3}
-                  className={`game-line v-line ${
-                    hoveredLine === `v-${row}-${col}` ? 'hovered' : ''
-                  }`}
-                  onClick={() => handleLineClick('v', row, col)}
-                  onMouseEnter={() =>
-                    !verticalLineStates[index] && setHoveredLine(`v-${row}-${col}`)
-                  }
-                  onMouseLeave={() => setHoveredLine(null)}
-                  style={{
-                    cursor: verticalLineStates[index] ? 'default' : 'pointer',
-                    filter: hoveredLine === `v-${row}-${col}` ? `drop-shadow(0 0 8px ${themeData.lineGlow})` : 'none'
-                  }}
-                />
+                <g key={`v-line-${row}-${col}`}>
+                  {/* Invisible clickable area (large stroke) */}
+                  <line
+                    x1={x1}
+                    y1={y1}
+                    x2={x1}
+                    y2={y2}
+                    stroke="transparent"
+                    strokeWidth={24}
+                    className="line-clickable"
+                    onClick={() => handleLineClick('v', row, col)}
+                    onMouseEnter={() =>
+                      !verticalLineStates[index] && setHoveredLine(`v-${row}-${col}`)
+                    }
+                    onMouseLeave={() => setHoveredLine(null)}
+                    style={{
+                      cursor: verticalLineStates[index] ? 'default' : 'pointer',
+                      pointerEvents: 'auto'
+                    }}
+                  />
+                  {/* Visible line */}
+                  <line
+                    x1={x1}
+                    y1={y1}
+                    x2={x1}
+                    y2={y2}
+                    stroke={themeData.lineColor}
+                    strokeWidth={verticalLineStates[index] ? 4 : 2}
+                    opacity={verticalLineStates[index] ? 1 : 0.3}
+                    className={`game-line v-line ${
+                      hoveredLine === `v-${row}-${col}` ? 'hovered' : ''
+                    }`}
+                    pointerEvents="none"
+                    style={{
+                      filter: hoveredLine === `v-${row}-${col}` ? `drop-shadow(0 0 8px ${themeData.lineGlow})` : 'none'
+                    }}
+                  />
+                </g>
               )
             })
           )}
@@ -440,6 +472,11 @@ function GlowDots() {
 
         {/* Game Board */}
         {renderGameBoard()}
+
+        {/* Help Text */}
+        <div className="game-help-text">
+          💡 Click or tap near any line to draw it
+        </div>
 
         {/* AI Thinking */}
         {aiThinking && (
