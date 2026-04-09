@@ -67,7 +67,7 @@
   border-color: #00ffff;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.6),
               inset 0 0 20px rgba(0, 255, 255, 0.2);
-  animation: spinRing 6s linear infinite;
+  animation: spinRing1 6s linear infinite, fadeRing1 4s ease-in-out infinite;
 }
 
 .ring-2 {
@@ -76,7 +76,7 @@
   border-color: #ff0080;
   box-shadow: 0 0 15px rgba(255, 0, 128, 0.5),
               inset 0 0 15px rgba(255, 0, 128, 0.1);
-  animation: spinRing 8s linear infinite reverse;
+  animation: spinRing2 8s linear infinite reverse, fadeRing2 5s ease-in-out infinite;
 }
 
 .ring-3 {
@@ -85,15 +85,60 @@
   border-color: #b026ff;
   box-shadow: 0 0 10px rgba(176, 38, 255, 0.4),
               inset 0 0 10px rgba(176, 38, 255, 0.1);
-  animation: spinRing 10s linear infinite;
+  animation: spinRing3 10s linear infinite, fadeRing3 6s ease-in-out infinite;
 }
 
-@keyframes spinRing {
+@keyframes spinRing1 {
   0% {
     transform: translate(-50%, -50%) rotateZ(0deg);
   }
   100% {
     transform: translate(-50%, -50%) rotateZ(360deg);
+  }
+}
+
+@keyframes spinRing2 {
+  0% {
+    transform: translate(-50%, -50%) rotateZ(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateZ(-360deg);
+  }
+}
+
+@keyframes spinRing3 {
+  0% {
+    transform: translate(-50%, -50%) rotateZ(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateZ(360deg);
+  }
+}
+
+@keyframes fadeRing1 {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeRing2 {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes fadeRing3 {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
   }
 }
 
