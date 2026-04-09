@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Zap,
@@ -6,7 +6,9 @@ import {
   Gamepad2,
   Brain,
   ChefHat,
-  Target
+  Target,
+  Sun,
+  Moon
 } from 'lucide-react'
 
 const apps = [
@@ -62,10 +64,38 @@ const apps = [
 
 function Home() {
   const [hoveredId, setHoveredId] = useState(null)
+  const [darkMode, setDarkMode] = useState(true)
   const navigate = useNavigate()
+
+  // Load dark mode preference from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem('darkMode')
+    if (saved !== null) {
+      setDarkMode(JSON.parse(saved))
+    }
+  }, [])
+
+  // Apply dark mode class and save preference
+  useEffect(() => {
+    const app = document.querySelector('.app')
+    if (app) {
+      if (darkMode) {
+        app.classList.add('dark-mode')
+        app.classList.remove('light-mode')
+      } else {
+        app.classList.remove('dark-mode')
+        app.classList.add('light-mode')
+      }
+    }
+    localStorage.setItem('darkMode', JSON.stringify(darkMode))
+  }, [darkMode])
 
   const handleButtonClick = (route) => {
     navigate(route)
+  }
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode)
   }
 
   return (
@@ -79,6 +109,9 @@ function Home() {
 
       <div className="container">
         <div className="header">
+          <button className="theme-toggle" onClick={toggleDarkMode} title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>
+            {darkMode ? <Sun size={24} /> : <Moon size={24} />}
+          </button>
           <h1 className="title">
             <span className="title-main">QuizItNow</span>
             <span className="title-sub">Your Gateway to Amazing Quiz & Game Apps</span>
@@ -113,7 +146,7 @@ function Home() {
 
         <footer className="footer">
           <p>Click any button to explore amazing quiz and game experiences</p>
-          <p className="footer-sub">Built with Cortex 🧠     Powered by Vortex 🕳️</p>
+          <p className="footer-sub">Built with Cortex 🧠     Powered by Vortex 🌌</p>
         </footer>
       </div>
     </div>
