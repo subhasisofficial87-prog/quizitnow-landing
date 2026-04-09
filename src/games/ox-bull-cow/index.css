@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 15% 5%;
+    --foreground: 0 0% 95%;
+
+    --card: 240 12% 8%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 240 12% 8%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 152 100% 50%;
+    --primary-foreground: 240 15% 5%;
+
+    --secondary: 38 100% 50%;
+    --secondary-foreground: 240 15% 5%;
+
+    --muted: 240 10% 14%;
+    --muted-foreground: 240 5% 55%;
+
+    --accent: 220 90% 56%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 10% 18%;
+    --input: 240 10% 18%;
+    --ring: 152 100% 50%;
+
+    --radius: 0.75rem;
+
+    --neon-glow: 0 0 20px hsl(152 100% 50% / 0.3);
+    --amber-glow: 0 0 20px hsl(38 100% 50% / 0.3);
+
+    --sidebar-background: 240 12% 8%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 152 100% 50%;
+    --sidebar-primary-foreground: 240 15% 5%;
+    --sidebar-accent: 240 10% 14%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 240 10% 18%;
+    --sidebar-ring: 152 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer utilities {
+  .font-mono-game {
+    font-family: 'Space Mono', monospace;
+  }
+
+  .neon-text {
+    text-shadow: 0 0 10px hsl(152 100% 50% / 0.5), 0 0 40px hsl(152 100% 50% / 0.2);
+  }
+
+  .amber-text {
+    text-shadow: 0 0 10px hsl(38 100% 50% / 0.5), 0 0 40px hsl(38 100% 50% / 0.2);
+  }
+
+  .neon-border {
+    box-shadow: var(--neon-glow), inset 0 0 20px hsl(152 100% 50% / 0.05);
+  }
+
+  .glass-card {
+    background: hsl(240 12% 8% / 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(240 10% 18% / 0.6);
+  }
+}
