@@ -15,7 +15,7 @@ function CosmicWordPlay() {
       </div>
       <div className="game-container-full">
         <iframe
-          src="https://subhasisofficial87-prog.github.io/cosmic-word-play-4dd7f5b1/"
+          src="/cosmic-word-play/"
           title="Cosmic Word Play"
           style={{
             width: '100%',

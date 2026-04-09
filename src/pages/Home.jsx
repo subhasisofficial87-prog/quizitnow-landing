@@ -18,8 +18,7 @@ const apps = [
     name: 'Word Play',
     icon: BookOpen,
     color: '#90EE90',
-    route: 'https://subhasisofficial87-prog.github.io/cosmic-word-play-4dd7f5b1/',
-    external: true,
+    route: '/cosmic-word-play',
     delay: 0.1
   },
   {
@@ -92,12 +91,8 @@ function Home() {
     localStorage.setItem('darkMode', JSON.stringify(darkMode))
   }, [darkMode])
 
-  const handleButtonClick = (app) => {
-    if (app.external) {
-      window.open(app.route, '_blank')
-    } else {
-      navigate(app.route)
-    }
+  const handleButtonClick = (route) => {
+    navigate(route)
   }
 
   const toggleDarkMode = () => {
@@ -159,7 +154,7 @@ function Home() {
             return (
               <button
                 key={app.id}
-                onClick={() => handleButtonClick(app)}
+                onClick={() => handleButtonClick(app.route)}
                 className={`app-button ${hoveredId === app.id ? 'hovered' : ''}`}
                 style={{
                   '--color': app.color,
