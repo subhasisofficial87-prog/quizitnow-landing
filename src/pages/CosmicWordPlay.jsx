@@ -261,6 +261,7 @@ function CosmicWordPlay() {
         <div id="gameBoard" class="game-board"></div>
         <div class="hint" id="hint"></div>
         <div class="message" id="message"></div>
+        <input type="text" id="guessInput" placeholder="" maxlength="5" autocomplete="off" style="display:none;">
         <div class="keyboard-container" id="keyboardContainer"></div>
         <button class="toggle-btn" onclick="toggleQwerty()">Switch to QWERTY</button>
         <button id="newGameBtn" onclick="initializeGame()" style="display:none; padding: 16px 32px; font-size: 18px; background: linear-gradient(135deg, #00ff00, #00dd00); color: #000000; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);">New Game</button>
