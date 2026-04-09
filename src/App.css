@@ -244,6 +244,22 @@
   position: relative;
 }
 
+.logo-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.logo-section .ai-logo-container {
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+  animation: fadeIn 1s ease-out;
+}
+
 .title {
   margin: 0;
   display: flex;

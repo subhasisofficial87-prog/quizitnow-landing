@@ -10,6 +10,7 @@ import {
   Sun,
   Moon
 } from 'lucide-react'
+import AI3DLogo from '../components/AI3DLogo'
 
 const apps = [
   {
@@ -138,10 +139,13 @@ function Home() {
           <button className="theme-toggle" onClick={toggleDarkMode} title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>
             {darkMode ? <Sun size={24} /> : <Moon size={24} />}
           </button>
-          <h1 className="title">
-            <span className="title-main">QuizItNow</span>
-            <span className="title-sub">Your Gateway to Amazing Quiz & Game Apps</span>
-          </h1>
+          <div className="logo-section">
+            <AI3DLogo />
+            <h1 className="title">
+              <span className="title-main">Quiz It Now</span>
+              <span className="title-sub">Your Gateway to Amazing Quiz & Game Apps</span>
+            </h1>
+          </div>
         </div>
 
         <div className="buttons-grid">
