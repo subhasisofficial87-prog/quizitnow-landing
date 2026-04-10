@@ -14,6 +14,7 @@ import GlowCrack from './pages/GlowCrack'
 import MindReader from './pages/MindReader'
 import AdvancedMindReader from './pages/AdvancedMindReader'
 import DealOrNoDeal from './pages/DealOrNoDeal'
+import GuessMyNumber from './pages/GuessMyNumber'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       <Route path="/mind-reader" element={<MindReader />} />
       <Route path="/advanced-mind-reader" element={<AdvancedMindReader />} />
       <Route path="/deal-or-no-deal" element={<DealOrNoDeal />} />
+      <Route path="/guess-my-number" element={<GuessMyNumber />} />
     </Routes>
   )
 }
