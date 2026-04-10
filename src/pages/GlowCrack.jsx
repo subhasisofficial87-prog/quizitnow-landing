@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft, RotateCcw, Settings, Volume2, VolumeX, Undo2, Plus, X } from 'lucide-react'
+import { ArrowLeft, RotateCcw, Settings, Volume2, VolumeX, Undo2, Plus, X, HelpCircle } from 'lucide-react'
 import '../styles/glowCrack.css'
 import {
   createGameState,
@@ -28,6 +28,7 @@ function GlowCrack() {
   const [stats, setStats] = useState(null)
   const [gameHistory, setGameHistory] = useState([])
   const [startTime, setStartTime] = useState(null)
+  const [showHowToPlay, setShowHowToPlay] = useState(false)
   const confettiRef = useRef(null)
 
   const themeData = getTheme(theme)
@@ -296,17 +297,20 @@ function GlowCrack() {
     )
   }
 
-  if (!gameState || menuOpen) {
-    return (
-      <div className={`mastermind-menu bg-gradient-to-br ${themeData.bg}`}>
-        <div className="menu-container">
-          <div className="menu-header">
-            <button onClick={() => navigate('/')} className="back-btn">
-              <ArrowLeft size={24} />
-            </button>
-          </div>
+  // Render menu or game screen
+  const mainContent = !gameState || menuOpen ? (
+    <div className={`mastermind-menu bg-gradient-to-br ${themeData.bg}`}>
+      <div className="menu-container">
+        <div className="menu-header">
+          <button onClick={() => navigate('/')} className="back-btn">
+            <ArrowLeft size={24} />
+          </button>
+          <button onClick={() => setShowHowToPlay(true)} className="how-to-play-btn" title="How To Play">
+            <HelpCircle size={24} />
+          </button>
+        </div>
 
-          <div className="menu-content">
+        <div className="menu-content">
             <h1 className="menu-title" style={{ color: themeData.accentColor }}>
               🔐 GlowCrack 🔐
             </h1>
@@ -382,10 +386,7 @@ function GlowCrack() {
           </div>
         </div>
       </div>
-    )
-  }
-
-  return (
+  ) : (
     <div className={`mastermind-game bg-gradient-to-br ${themeData.bg}`}>
       <div className="game-container">
         {/* Header */}
@@ -400,6 +401,13 @@ function GlowCrack() {
           </div>
 
           <div className="header-controls">
+            <button
+              onClick={() => setShowHowToPlay(true)}
+              className="control-btn"
+              title="How To Play"
+            >
+              <HelpCircle size={20} />
+            </button>
             <button
               onClick={() => setSoundEnabled(!soundEnabled)}
               className="control-btn"
@@ -491,6 +499,73 @@ function GlowCrack() {
         <MastermindConfetti ref={confettiRef} theme={themeData} />
       </div>
     </div>
+  )
+
+  // Return main content with modal overlay
+  return (
+    <>
+      {mainContent}
+
+      {/* How To Play Modal */}
+      {showHowToPlay && (
+        <div className="how-to-play-overlay">
+          <div className="how-to-play-modal" style={{ borderColor: themeData.accentColor }}>
+            <button
+              onClick={() => setShowHowToPlay(false)}
+              className="modal-close-btn"
+              style={{ color: themeData.accentColor }}
+            >
+              <X size={28} />
+            </button>
+
+            <h2 className="modal-title" style={{ color: themeData.accentColor }}>
+              🎮 How To Play GlowCrack
+            </h2>
+
+            <div className="modal-content">
+              <div className="instruction-section">
+                <h3 className="section-title" style={{ color: themeData.textColor }}>
+                  The Objective
+                </h3>
+                <p style={{ color: themeData.textColor }}>
+                  GlowCrack is a code-breaking game where you must guess the secret code within a limited number of attempts. Each code consists of colored pegs in a specific sequence. After each guess, you receive feedback—black pegs indicate a color in the correct position, while white pegs show you have the right color but in the wrong spot. Use this feedback strategically to crack the code before your guesses run out!
+                </p>
+              </div>
+
+              <div className="instruction-section">
+                <h3 className="section-title" style={{ color: themeData.textColor }}>
+                  Step-by-Step Guide
+                </h3>
+                <ol className="steps-list" style={{ color: themeData.textColor }}>
+                  <li><strong>Choose Your Game:</strong> Select a difficulty level (Easy, Classic, Medium, Hard, Expert) that determines the number of pegs and available colors. More pegs and colors mean harder challenges!</li>
+                  <li><strong>Select a Color:</strong> Click on any color in the color palette at the bottom of the screen. The selected color will glow brighter to indicate it's active.</li>
+                  <li><strong>Place Your Pegs:</strong> Click on empty peg slots in the current guess row to place your selected color. You can click multiple times to add different colors. Each slot holds one colored peg.</li>
+                  <li><strong>Remove Pegs (Optional):</strong> Click on an already-placed peg to remove it and try a different color in that position.</li>
+                  <li><strong>Submit Your Guess:</strong> Once all peg slots are filled, click the "Submit Guess" button. The game will show you feedback on the right side—count the black and white feedback pegs carefully!</li>
+                  <li><strong>Interpret Feedback:</strong> Black feedback pegs = correct color in correct position (perfect match). White feedback pegs = correct color but wrong position. No feedback pegs for that position = that color isn't in the secret code at all.</li>
+                  <li><strong>Make Your Next Guess:</strong> Use the feedback from your previous guess to narrow down possibilities. Move on to the next row and try again. You can use the Undo button to change your last guess if needed.</li>
+                  <li><strong>Win or Lose:</strong> Get all 4 pegs correct in the right positions and you've cracked the code! Fail to do so within your guess limit and the secret code will be revealed. Either way, your game is saved to your statistics!</li>
+                  <li><strong>Play Again:</strong> Click "Play Again" to start a new game with a new secret code, or go back to the menu to change the difficulty or theme.</li>
+                </ol>
+              </div>
+
+              <div className="tips-section" style={{ borderColor: themeData.accentColor }}>
+                <h3 className="section-title" style={{ color: themeData.accentColor }}>
+                  💡 Pro Tips
+                </h3>
+                <ul style={{ color: themeData.textColor }}>
+                  <li>Start with a balanced mix of colors to eliminate possibilities quickly</li>
+                  <li>Pay close attention to black vs white feedback pegs—they mean very different things!</li>
+                  <li>If you get a white peg, that color exists in the code but not in that position</li>
+                  <li>Use the Undo button strategically to test different combinations without wasting guesses</li>
+                  <li>Try different themes to find the visual style you like best</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 
