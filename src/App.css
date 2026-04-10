@@ -516,16 +516,16 @@
   }
 
   .app-button {
-    padding: 1.5rem;
+    padding: 2rem;
   }
 
   .button-icon {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
   }
 
   .button-text {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 
   .glow-orb {
@@ -556,22 +556,22 @@
   }
 
   .app-button {
-    padding: 1.2rem;
-    gap: 0.8rem;
+    padding: 2rem;
+    gap: 1rem;
   }
 
   .button-icon {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
   }
 
   .button-icon svg {
-    width: 30px;
-    height: 30px;
+    width: 48px;
+    height: 48px;
   }
 
   .button-text {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   .footer p {
