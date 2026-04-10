@@ -23,22 +23,6 @@ const gameCategories = [
     color: '#00d4ff',
     games: [
       {
-        id: 9,
-        name: 'Mind Reader',
-        icon: Lightbulb,
-        color: '#ffb700',
-        route: '/mind-reader',
-        type: 'Reverse Guess'
-      },
-      {
-        id: 10,
-        name: 'Advanced Mind Reader',
-        icon: Brain,
-        color: '#ffb700',
-        route: '/advanced-mind-reader',
-        type: 'Question Deduction'
-      },
-      {
         id: 3,
         name: 'Guess My Number',
         icon: Calculator,
