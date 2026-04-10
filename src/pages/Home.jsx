@@ -12,7 +12,9 @@ import {
   Sun,
   Moon,
   Lightbulb,
-  Trophy
+  Trophy,
+  HelpCircle,
+  X
 } from 'lucide-react'
 import AI3DLogo from '../components/AI3DLogo'
 
@@ -61,7 +63,37 @@ const gameCategories = [
         icon: Trophy,
         color: '#ffb700',
         route: '/deal-or-no-deal',
-        type: 'High-Stakes Game'
+        type: 'High-Stakes Game',
+        howToPlay: {
+          short: 'Pick a briefcase as your prize, then eliminate other cases through rounds. After each round, the Banker offers you money based on remaining values. Accept the offer to win it, or keep playing and risk it all to reach your original case!',
+          long: `1. Start Game: Click "Start Game" to begin your high-stakes adventure.
+
+2. Pick Your Briefcase: From 16 briefcases, select ONE case that will be your final prize. This case will remain locked until the end.
+
+3. Round 1 - Open 5 Cases: In the first round, you must open 5 other briefcases. Click on any unopened case to reveal its value (₹1 to ₹10,00,000). The values disappear from play.
+
+4. Banker's First Offer: After opening 5 cases, the Banker appears and offers you money based on the remaining values. This offer is usually LOW because the Banker has an advantage early on.
+
+5. Make Your Decision: You have two choices:
+   • DEAL: Accept the Banker's offer and win that amount immediately. The game ends.
+   • NO DEAL: Reject the offer and continue to the next round. You risk getting a worse offer later.
+
+6. Subsequent Rounds (2-5): Repeat the process, opening fewer cases each round:
+   • Round 2: Open 4 cases
+   • Round 3: Open 3 cases
+   • Round 4: Open 2 cases
+   • Round 5: Open 1 case
+
+7. Banker's Changing Strategy: As rounds progress, the Banker's offers improve because there are fewer cases left and the pressure increases on the banker.
+
+8. Final Reveal: After Round 5, when only your original case remains, your briefcase is automatically opened. You see what you originally picked!
+
+9. Compare & Win: If you accepted a Deal earlier, you get that amount. If you rejected all deals, you get whatever was in your final case.
+
+10. Play Again: Win big or learn from your strategy - replay as many times as you want to master the game!
+
+STRATEGY TIPS: Pay attention to which values get eliminated. High remaining values mean better offers coming. Trust your instincts and remember - the longer you play, the bigger the risks but also the bigger the potential rewards!`
+        }
       }
     ]
   },
@@ -126,6 +158,7 @@ const apps = gameCategories.flatMap(cat =>
 function Home() {
   const [hoveredId, setHoveredId] = useState(null)
   const [darkMode, setDarkMode] = useState(true)
+  const [selectedGameHelp, setSelectedGameHelp] = useState(null)
   const navigate = useNavigate()
 
   // Load dark mode preference from localStorage
@@ -222,27 +255,41 @@ function Home() {
                 {category.games.map((app, index) => {
                   const IconComponent = app.icon
                   return (
-                    <button
-                      key={app.id}
-                      onClick={() => handleButtonClick(app.route)}
-                      className={`app-button ${hoveredId === app.id ? 'hovered' : ''}`}
-                      style={{
-                        '--color': app.color,
-                        '--delay': `${0.1 + index * 0.1}s`,
-                        animationDelay: `${0.1 + index * 0.1}s`
-                      }}
-                      onMouseEnter={() => setHoveredId(app.id)}
-                      onMouseLeave={() => setHoveredId(null)}
-                    >
-                      <div className="button-icon">
-                        <IconComponent size={48} />
-                      </div>
-                      <div className="button-content">
-                        <span className="button-text">{app.name}</span>
-                        <span className="button-type">{app.type}</span>
-                      </div>
-                      <div className="button-glow"></div>
-                    </button>
+                    <div key={app.id} className="button-wrapper">
+                      <button
+                        onClick={() => handleButtonClick(app.route)}
+                        className={`app-button ${hoveredId === app.id ? 'hovered' : ''}`}
+                        style={{
+                          '--color': app.color,
+                          '--delay': `${0.1 + index * 0.1}s`,
+                          animationDelay: `${0.1 + index * 0.1}s`
+                        }}
+                        onMouseEnter={() => setHoveredId(app.id)}
+                        onMouseLeave={() => setHoveredId(null)}
+                      >
+                        <div className="button-icon">
+                          <IconComponent size={48} />
+                        </div>
+                        <div className="button-content">
+                          <span className="button-text">{app.name}</span>
+                          <span className="button-type">{app.type}</span>
+                        </div>
+                        <div className="button-glow"></div>
+                      </button>
+                      {app.howToPlay && (
+                        <button
+                          className="help-button-small"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedGameHelp(app)
+                          }}
+                          title="How To Play"
+                          style={{ '--color': app.color }}
+                        >
+                          <HelpCircle size={20} />
+                        </button>
+                      )}
+                    </div>
                   )
                 })}
               </div>
@@ -261,6 +308,54 @@ function Home() {
             <a href="mailto:hello@quizitnow.com" className="footer-link">Support: hello@quizitnow.com</a>
           </div>
         </footer>
+
+        {/* Help Modal */}
+        {selectedGameHelp && (
+          <div className="help-modal-overlay" onClick={() => setSelectedGameHelp(null)}>
+            <div className="help-modal" onClick={(e) => e.stopPropagation()}>
+              <button
+                className="help-modal-close"
+                onClick={() => setSelectedGameHelp(null)}
+              >
+                <X size={24} />
+              </button>
+
+              <h2 className="help-modal-title" style={{ color: selectedGameHelp.color }}>
+                {selectedGameHelp.name} - How To Play
+              </h2>
+
+              <div className="help-modal-content">
+                <div className="help-section">
+                  <h3>Quick Overview</h3>
+                  <p>{selectedGameHelp.howToPlay.short}</p>
+                </div>
+
+                <div className="help-section">
+                  <h3>Step-by-Step Guide</h3>
+                  <p className="help-long-description">
+                    {selectedGameHelp.howToPlay.long.split('\n').map((line, index) => (
+                      <span key={index}>
+                        {line}
+                        <br />
+                      </span>
+                    ))}
+                  </p>
+                </div>
+              </div>
+
+              <button
+                className="help-modal-button"
+                onClick={() => {
+                  setSelectedGameHelp(null)
+                  navigate(selectedGameHelp.route)
+                }}
+                style={{ borderColor: selectedGameHelp.color }}
+              >
+                Play {selectedGameHelp.name}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
