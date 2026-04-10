@@ -312,7 +312,8 @@ function GlowCrack() {
             <ArrowLeft size={24} />
           </button>
           <button onClick={() => setShowHowToPlay(true)} className="how-to-play-btn" title="How To Play">
-            <HelpCircle size={24} />
+            <HelpCircle size={20} style={{ marginRight: '8px' }} />
+            How To Play
           </button>
         </div>
 
@@ -409,10 +410,11 @@ function GlowCrack() {
           <div className="header-controls">
             <button
               onClick={() => setShowHowToPlay(true)}
-              className="control-btn"
+              className="control-btn how-to-play-control"
               title="How To Play"
             >
-              <HelpCircle size={20} />
+              <HelpCircle size={18} style={{ marginRight: '6px' }} />
+              How To Play
             </button>
             <button
               onClick={() => setSoundEnabled(!soundEnabled)}

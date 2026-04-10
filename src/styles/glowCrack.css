@@ -617,20 +617,29 @@
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
-  padding: 0.75rem;
-  border-radius: 50%;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
   margin-left: auto;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .how-to-play-btn:hover {
   background: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.4);
-  transform: scale(1.1);
+  transform: scale(1.05);
+}
+
+/* How To Play Button in Game Controls */
+.how-to-play-control {
+  padding: 0.6rem 0.8rem;
+  font-size: 0.85rem;
 }
 
 /* How To Play Modal */
