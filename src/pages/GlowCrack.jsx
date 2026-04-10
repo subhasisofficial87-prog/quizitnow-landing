@@ -235,7 +235,13 @@ function GlowCrack() {
                       cursor: 'pointer',
                       border: color ? 'none' : '2px dashed rgba(255,255,255,0.3)'
                     }}
-                    onClick={() => handleRemovePeg(idx)}
+                    onClick={() => {
+                      if (color) {
+                        handleRemovePeg(idx)
+                      } else if (selectedColorIndex !== null) {
+                        handlePegClick(idx)
+                      }
+                    }}
                   >
                     {!color && <Plus size={16} />}
                   </div>
