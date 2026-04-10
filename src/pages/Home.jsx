@@ -56,7 +56,15 @@ const gameCategories = [
         color: '#ff1493',
         route: '/glow-dots',
         type: 'Strategy Game'
-      },
+      }
+    ]
+  },
+  {
+    id: 'luck',
+    title: '🎰 Try Your Luck',
+    description: 'Test your fortune with high-stakes games and exciting challenges',
+    color: '#ff6b6b',
+    games: [
       {
         id: 12,
         name: 'Deal or No Deal',
