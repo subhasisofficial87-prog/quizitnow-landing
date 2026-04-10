@@ -8,6 +8,7 @@ import {
   ChefHat,
   Target,
   Sparkles,
+  Lock,
   Sun,
   Moon
 } from 'lucide-react'
@@ -69,6 +70,14 @@ const apps = [
     color: '#ff1493',
     route: '/glow-dots',
     delay: 0.7
+  },
+  {
+    id: 8,
+    name: 'GlowCrack',
+    icon: Lock,
+    color: '#00ff9f',
+    route: '/glow-crack',
+    delay: 0.8
   }
 ]
 
