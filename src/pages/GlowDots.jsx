@@ -153,22 +153,32 @@ function GlowDots() {
     if (!gameState) return null
 
     const { gridSize, horizontalLineStates, verticalLineStates, boxOwners } = gameState
-    const padding = 60
-    const dotSpacing = (window.innerWidth - 2 * padding) / (gridSize - 1)
+    const padding = 80
+    const dotRadius = 8
+    const dotSpacing = (window.innerWidth - 2 * padding - 2 * dotRadius) / (gridSize - 1)
+
+    // Calculate actual grid bounds with dot radius
+    const gridLeft = padding + dotRadius
+    const gridRight = padding + (gridSize - 1) * dotSpacing + dotRadius
+    const gridTop = padding + dotRadius
+    const gridBottom = padding + (gridSize - 1) * dotSpacing + dotRadius
+    const svgWidth = gridRight + padding + dotRadius
+    const svgHeight = gridBottom + padding + dotRadius
 
     return (
       <div className="game-board-wrapper">
         <svg
           className="game-board"
           width="100%"
-          viewBox={`0 0 ${window.innerWidth} ${window.innerHeight - 250}`}
-          preserveAspectRatio="xMidYMid slice"
+          height="100%"
+          viewBox={`0 0 ${svgWidth} ${svgHeight}`}
+          preserveAspectRatio="xMidYMid meet"
         >
           {/* Boxes */}
           {Array.from({ length: gridSize - 1 }).map((_, row) =>
             Array.from({ length: gridSize - 1 }).map((_, col) => {
-              const x1 = padding + col * dotSpacing
-              const y1 = padding + row * dotSpacing
+              const x1 = gridLeft + col * dotSpacing
+              const y1 = gridTop + row * dotSpacing
               const x2 = x1 + dotSpacing
               const y2 = y1 + dotSpacing
               const boxIndex = row * (gridSize - 1) + col
@@ -197,8 +207,8 @@ function GlowDots() {
           {Array.from({ length: gridSize }).map((_, row) =>
             Array.from({ length: gridSize - 1 }).map((_, col) => {
               const index = row * (gridSize - 1) + col
-              const x1 = padding + col * dotSpacing
-              const y1 = padding + row * dotSpacing
+              const x1 = gridLeft + col * dotSpacing
+              const y1 = gridTop + row * dotSpacing
               const x2 = x1 + dotSpacing
 
               return (
@@ -248,8 +258,8 @@ function GlowDots() {
           {Array.from({ length: gridSize - 1 }).map((_, row) =>
             Array.from({ length: gridSize }).map((_, col) => {
               const index = row * gridSize + col
-              const x1 = padding + col * dotSpacing
-              const y1 = padding + row * dotSpacing
+              const x1 = gridLeft + col * dotSpacing
+              const y1 = gridTop + row * dotSpacing
               const y2 = y1 + dotSpacing
 
               return (
@@ -298,19 +308,19 @@ function GlowDots() {
           {/* Dots */}
           {Array.from({ length: gridSize }).map((_, row) =>
             Array.from({ length: gridSize }).map((_, col) => {
-              const x = padding + col * dotSpacing
-              const y = padding + row * dotSpacing
+              const x = gridLeft + col * dotSpacing
+              const y = gridTop + row * dotSpacing
 
               return (
                 <circle
                   key={`dot-${row}-${col}`}
                   cx={x}
                   cy={y}
-                  r="6"
+                  r={dotRadius}
                   fill={themeData.dotColor}
                   className="game-dot"
                   style={{
-                    filter: `drop-shadow(0 0 8px ${themeData.dotGlow})`
+                    filter: `drop-shadow(0 0 10px ${themeData.dotGlow})`
                   }}
                 />
               )
