@@ -11,7 +11,8 @@ import {
   Lock,
   Sun,
   Moon,
-  Lightbulb
+  Lightbulb,
+  Trophy
 } from 'lucide-react'
 import AI3DLogo from '../components/AI3DLogo'
 
@@ -53,6 +54,14 @@ const gameCategories = [
         color: '#ff1493',
         route: '/glow-dots',
         type: 'Strategy Game'
+      },
+      {
+        id: 12,
+        name: 'Deal or No Deal',
+        icon: Trophy,
+        color: '#ffb700',
+        route: '/deal-or-no-deal',
+        type: 'High-Stakes Game'
       }
     ]
   },

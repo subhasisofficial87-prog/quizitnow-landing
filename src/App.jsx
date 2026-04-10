@@ -13,6 +13,7 @@ import GlowDots from './pages/GlowDots'
 import GlowCrack from './pages/GlowCrack'
 import MindReader from './pages/MindReader'
 import AdvancedMindReader from './pages/AdvancedMindReader'
+import DealOrNoDeal from './pages/DealOrNoDeal'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
       <Route path="/glow-crack" element={<GlowCrack />} />
       <Route path="/mind-reader" element={<MindReader />} />
       <Route path="/advanced-mind-reader" element={<AdvancedMindReader />} />
+      <Route path="/deal-or-no-deal" element={<DealOrNoDeal />} />
     </Routes>
   )
 }
