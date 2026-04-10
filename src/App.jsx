@@ -11,6 +11,7 @@ import TermsOfService from './pages/TermsOfService'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import GlowDots from './pages/GlowDots'
 import GlowCrack from './pages/GlowCrack'
+import MindReader from './pages/MindReader'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Route path="/privacy" element={<PrivacyPolicy />} />
       <Route path="/glow-dots" element={<GlowDots />} />
       <Route path="/glow-crack" element={<GlowCrack />} />
+      <Route path="/mind-reader" element={<MindReader />} />
     </Routes>
   )
 }

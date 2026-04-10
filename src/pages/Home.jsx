@@ -10,7 +10,8 @@ import {
   Sparkles,
   Lock,
   Sun,
-  Moon
+  Moon,
+  Lightbulb
 } from 'lucide-react'
 import AI3DLogo from '../components/AI3DLogo'
 
@@ -21,6 +22,14 @@ const gameCategories = [
     description: 'Challenge your problem-solving skills with puzzles and strategic games',
     color: '#00d4ff',
     games: [
+      {
+        id: 9,
+        name: 'Mind Reader',
+        icon: Lightbulb,
+        color: '#ffb700',
+        route: '/mind-reader',
+        type: 'Reverse Guess'
+      },
       {
         id: 3,
         name: 'Guess My Number',
