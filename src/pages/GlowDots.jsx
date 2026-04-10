@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft, RotateCcw, Settings, Volume2, VolumeX, Undo2 } from 'lucide-react'
+import { ArrowLeft, RotateCcw, Settings, Volume2, VolumeX, Undo2, HelpCircle, X } from 'lucide-react'
 import '../styles/glowDots.css'
 import { createEmptyGame, drawLine, getAvailableMoves, undoLastMove } from '../utils/glowDotsGame'
 import { getAIMove } from '../utils/glowDotsAI'
@@ -21,6 +21,7 @@ function GlowDots() {
   const [aiThinking, setAiThinking] = useState(false)
   const [showVictory, setShowVictory] = useState(false)
   const [hoveredLine, setHoveredLine] = useState(null)
+  const [showHowToPlay, setShowHowToPlay] = useState(false)
   const canvasRef = useRef(null)
   const confettiRef = useRef(null)
 
@@ -333,17 +334,20 @@ function GlowDots() {
     )
   }
 
-  if (!gameState || menuOpen) {
-    return (
-      <div className={`glow-dots-menu bg-gradient-to-br ${themeData.bg}`}>
-        <div className="menu-container">
-          <div className="menu-header">
-            <button onClick={() => navigate('/')} className="back-btn">
-              <ArrowLeft size={24} />
-            </button>
-          </div>
+  // Render menu or game screen
+  const mainContent = !gameState || menuOpen ? (
+    <div className={`glow-dots-menu bg-gradient-to-br ${themeData.bg}`}>
+      <div className="menu-container">
+        <div className="menu-header">
+          <button onClick={() => navigate('/')} className="back-btn">
+            <ArrowLeft size={24} />
+          </button>
+          <button onClick={() => setShowHowToPlay(true)} className="how-to-play-btn" title="How To Play">
+            <HelpCircle size={24} />
+          </button>
+        </div>
 
-          <div className="menu-content">
+        <div className="menu-content">
             <h1 className="menu-title" style={{ color: themeData.accent }}>
               ✨ Glow Dots ✨
             </h1>
@@ -429,10 +433,7 @@ function GlowDots() {
           </div>
         </div>
       </div>
-    )
-  }
-
-  return (
+  ) : (
     <div className={`glow-dots-game bg-gradient-to-br ${themeData.bg}`}>
       <div className="game-container">
         {/* Header */}
@@ -464,6 +465,13 @@ function GlowDots() {
           </div>
 
           <div className="header-controls">
+            <button
+              onClick={() => setShowHowToPlay(true)}
+              className="control-btn"
+              title="How To Play"
+            >
+              <HelpCircle size={20} />
+            </button>
             <button
               onClick={() => setSoundEnabled(!soundEnabled)}
               className="control-btn"
@@ -527,6 +535,76 @@ function GlowDots() {
         )}
       </div>
     </div>
+  )
+
+  // Return main content with modal overlay
+  return (
+    <>
+      {mainContent}
+
+      {/* How To Play Modal */}
+      {showHowToPlay && (
+        <div className="how-to-play-overlay">
+          <div className="how-to-play-modal" style={{ borderColor: themeData.accent }}>
+            <button
+              onClick={() => setShowHowToPlay(false)}
+              className="modal-close-btn"
+              style={{ color: themeData.accent }}
+            >
+              <X size={28} />
+            </button>
+
+            <h2 className="modal-title" style={{ color: themeData.accent }}>
+              🎮 How To Play Glow Dots
+            </h2>
+
+            <div className="modal-content">
+              <div className="instruction-section">
+                <h3 className="section-title" style={{ color: themeData.textColor }}>
+                  The Game Overview
+                </h3>
+                <p style={{ color: themeData.textColor }}>
+                  Glow Dots is a strategic turn-based game where players take turns drawing lines between dots on a grid. Each line you draw connects two adjacent dots. When you complete the fourth side of a box, you claim that box and get an extra turn. The game ends when all boxes on the grid have been claimed. The player who claims the most boxes wins! You can play against the AI with different difficulty levels (Easy, Normal, Expert) or challenge another player in 2-player mode.
+                </p>
+              </div>
+
+              <div className="instruction-section">
+                <h3 className="section-title" style={{ color: themeData.textColor }}>
+                  Step-by-Step Guide
+                </h3>
+                <ol className="steps-list" style={{ color: themeData.textColor }}>
+                  <li><strong>Choose Your Game Mode:</strong> Select either "vs AI" to play against the computer or "2 Player" to play with another person. In AI mode, choose your preferred difficulty level (Easy for a casual game, Normal for a balanced challenge, or Expert for intense competition).</li>
+                  <li><strong>Pick Your Grid Size:</strong> Choose from 3×3 (6 boxes), 4×4 (9 boxes), 5×5 (16 boxes), 6×6 (25 boxes), or 7×7 (36 boxes). Larger grids create longer, more strategic games.</li>
+                  <li><strong>Select a Theme:</strong> Choose your favorite visual theme to customize the game's appearance. Each theme has unique colors for the two players and different visual styles.</li>
+                  <li><strong>Start the Game:</strong> Click "Play Now" to begin. The game board will appear with dots arranged in a grid and empty space between them for drawing lines.</li>
+                  <li><strong>Draw Your Line:</strong> Click or tap near any line (horizontal or vertical) between two adjacent dots to draw it. The line will appear and change color to show it's been claimed. Hover near a line to see a preview before clicking.</li>
+                  <li><strong>Complete a Box:</strong> When you draw the fourth and final line around a box, you automatically claim it and your color fills the box. You also get an extra turn to draw another line immediately!</li>
+                  <li><strong>Let Opponents Play:</strong> After drawing a line that doesn't complete a box, it becomes your opponent's turn. If you're playing against AI, watch as the computer makes its strategic move.</li>
+                  <li><strong>Use Strategic Thinking:</strong> Be careful not to give your opponent an easy box to complete! Try to create situations where you can complete multiple boxes in a row by claiming the third side of multiple boxes and letting your opponent complete them on their turn, then taking the fourth sides.</li>
+                  <li><strong>Check the Score:</strong> Watch the score display at the top of the screen showing each player's box count. The game ends when all boxes are claimed, and the player with the most boxes wins!</li>
+                  <li><strong>Use Game Controls:</strong> Click the sound button to toggle sound effects on/off, use Undo to take back your last move, or Reset to start a new game with the same settings. When the game ends, you can play again or return to the menu to try different settings.</li>
+                </ol>
+              </div>
+
+              <div className="tips-section" style={{ borderColor: themeData.accent }}>
+                <h3 className="section-title" style={{ color: themeData.accent }}>
+                  💡 Strategic Tips
+                </h3>
+                <ul style={{ color: themeData.textColor }}>
+                  <li>Always think two moves ahead - try to predict what your opponent will do</li>
+                  <li>Early game: Spread out your lines to control different areas of the board</li>
+                  <li>Mid game: Start creating "chains" of boxes where you can claim multiple in a row</li>
+                  <li>Late game: Focus on completing boxes strategically to maximize your final score</li>
+                  <li>The "sacrifice" strategy: Sometimes completing just 3 sides of a box and leaving 1 empty forces your opponent into a bad position</li>
+                  <li>Play different grid sizes to practice different strategies - smaller grids reward careful planning, larger grids test your tactical vision</li>
+                  <li>Try different AI difficulty levels to improve your skills - Expert AI plays almost perfectly!</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   )
 }
 
