@@ -14,72 +14,104 @@ import {
 } from 'lucide-react'
 import AI3DLogo from '../components/AI3DLogo'
 
-const apps = [
+const gameCategories = [
   {
-    id: 1,
-    name: 'Word Play',
-    icon: BookOpen,
-    color: '#90EE90',
-    route: '/cosmic-word-play',
-    delay: 0.1
-  },
-  {
-    id: 2,
-    name: 'Zoomable Earth',
-    icon: Globe,
-    color: '#00ff88',
-    route: '/zoomable-earth',
-    delay: 0.2
-  },
-  {
-    id: 3,
-    name: 'Guess My Number',
-    icon: Calculator,
-    color: '#ff0080',
-    route: '/guess-my-neon',
-    delay: 0.3
-  },
-  {
-    id: 4,
-    name: 'Quiz Master',
-    icon: Brain,
-    color: '#b026ff',
-    route: '/quizitnow',
-    delay: 0.4
-  },
-  {
-    id: 5,
-    name: 'Recipe Generator',
-    icon: ChefHat,
-    color: '#ff6b00',
-    route: '/recipe-generator',
-    delay: 0.5
-  },
-  {
-    id: 6,
-    name: 'OX Bull Cow',
-    icon: Target,
+    id: 'logic',
+    title: '🧩 Logic & Code-Breaking Games',
+    description: 'Challenge your problem-solving skills with puzzles and strategic games',
     color: '#00d4ff',
-    route: '/ox-bull-cow',
-    delay: 0.6
+    games: [
+      {
+        id: 3,
+        name: 'Guess My Number',
+        icon: Calculator,
+        color: '#ff0080',
+        route: '/guess-my-neon',
+        type: 'Deduction Game'
+      },
+      {
+        id: 6,
+        name: 'OX Bull Cow',
+        icon: Target,
+        color: '#00d4ff',
+        route: '/ox-bull-cow',
+        type: 'Code-Breaking'
+      },
+      {
+        id: 8,
+        name: 'GlowCrack',
+        icon: Lock,
+        color: '#00ff9f',
+        route: '/glow-crack',
+        type: 'Mastermind Puzzle'
+      },
+      {
+        id: 7,
+        name: 'Glow Dots',
+        icon: Sparkles,
+        color: '#ff1493',
+        route: '/glow-dots',
+        type: 'Strategy Game'
+      }
+    ]
   },
   {
-    id: 7,
-    name: 'Glow Dots',
-    icon: Sparkles,
-    color: '#ff1493',
-    route: '/glow-dots',
-    delay: 0.7
+    id: 'learning',
+    title: '🧠 Knowledge & Learning Games',
+    description: 'Test your knowledge and expand your mind with educational experiences',
+    color: '#b026ff',
+    games: [
+      {
+        id: 1,
+        name: 'Word Play',
+        icon: BookOpen,
+        color: '#90EE90',
+        route: '/cosmic-word-play',
+        type: 'Word Game'
+      },
+      {
+        id: 4,
+        name: 'Quiz Master',
+        icon: Brain,
+        color: '#b026ff',
+        route: '/quizitnow',
+        type: 'Quiz Game'
+      },
+      {
+        id: 2,
+        name: 'Zoomable Earth',
+        icon: Globe,
+        color: '#00ff88',
+        route: '/zoomable-earth',
+        type: 'Interactive Learning'
+      }
+    ]
   },
   {
-    id: 8,
-    name: 'GlowCrack',
-    icon: Lock,
-    color: '#00ff9f',
-    route: '/glow-crack',
-    delay: 0.8
+    id: 'creative',
+    title: '🎨 Creative & Utility Tools',
+    description: 'Explore creative tools and utilities for inspiration and assistance',
+    color: '#ff6b00',
+    games: [
+      {
+        id: 5,
+        name: 'Recipe Generator',
+        icon: ChefHat,
+        color: '#ff6b00',
+        route: '/recipe-generator',
+        type: 'Creative Tool'
+      }
+    ]
   }
 ]
+
+const apps = gameCategories.flatMap(cat =>
+  cat.games.map((game, index) => ({
+    ...game,
+    delay: 0.1 + index * 0.1,
+    category: cat.id
+  }))
+)
 
 function Home() {
   const [hoveredId, setHoveredId] = useState(null)
@@ -166,30 +198,46 @@ function Home() {
           </div>
         </div>
 
-        <div className="buttons-grid">
-          {apps.map((app) => {
-            const IconComponent = app.icon
-            return (
-              <button
-                key={app.id}
-                onClick={() => handleButtonClick(app.route)}
-                className={`app-button ${hoveredId === app.id ? 'hovered' : ''}`}
-                style={{
-                  '--color': app.color,
-                  '--delay': `${app.delay}s`,
-                  animationDelay: `${app.delay}s`
-                }}
-                onMouseEnter={() => setHoveredId(app.id)}
-                onMouseLeave={() => setHoveredId(null)}
-              >
-                <div className="button-icon">
-                  <IconComponent size={48} />
-                </div>
-                <span className="button-text">{app.name}</span>
-                <div className="button-glow"></div>
-              </button>
-            )
-          })}
+        <div className="games-container">
+          {gameCategories.map((category) => (
+            <section key={category.id} className="game-category">
+              <div className="category-header">
+                <h2 className="category-title" style={{ color: category.color }}>
+                  {category.title}
+                </h2>
+                <p className="category-description">{category.description}</p>
+              </div>
+
+              <div className="category-grid">
+                {category.games.map((app, index) => {
+                  const IconComponent = app.icon
+                  return (
+                    <button
+                      key={app.id}
+                      onClick={() => handleButtonClick(app.route)}
+                      className={`app-button ${hoveredId === app.id ? 'hovered' : ''}`}
+                      style={{
+                        '--color': app.color,
+                        '--delay': `${0.1 + index * 0.1}s`,
+                        animationDelay: `${0.1 + index * 0.1}s`
+                      }}
+                      onMouseEnter={() => setHoveredId(app.id)}
+                      onMouseLeave={() => setHoveredId(null)}
+                    >
+                      <div className="button-icon">
+                        <IconComponent size={48} />
+                      </div>
+                      <div className="button-content">
+                        <span className="button-text">{app.name}</span>
+                        <span className="button-type">{app.type}</span>
+                      </div>
+                      <div className="button-glow"></div>
+                    </button>
+                  )
+                })}
+              </div>
+            </section>
+          ))}
         </div>
 
         <footer className="footer">
