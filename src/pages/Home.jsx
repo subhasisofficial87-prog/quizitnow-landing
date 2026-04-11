@@ -14,8 +14,7 @@ import {
   Lightbulb,
   Trophy,
   HelpCircle,
-  X,
-  Dice5
+  X
 } from 'lucide-react'
 import AI3DLogo from '../components/AI3DLogo'
 
@@ -57,56 +56,6 @@ const gameCategories = [
         color: '#ff1493',
         route: '/glow-dots',
         type: 'Strategy Game'
-      }
-    ]
-  },
-  {
-    id: 'numbers',
-    title: '🔢 Number Games',
-    description: 'Test your logic and number-guessing skills',
-    color: '#00ff9f',
-    games: [
-      {
-        id: 13,
-        name: 'Guess My Number',
-        icon: Dice5,
-        color: '#00d4ff',
-        route: '/guess-my-number',
-        type: 'Guessing Game',
-        howToPlay: {
-          short: 'I think of a number within a range, and you have to guess it! After each guess, I tell you if your number is too high or too low. Use binary search strategy to find it in the fewest attempts!',
-          long: `1. Choose Your Difficulty: Select from Easy (1-50), Medium (1-100), Hard (1-500), or Extreme (1-1000).
-
-2. Game Starts: I think of a random number within the chosen range.
-
-3. Make Your Guess: Enter a number in the input field and click "Guess" or press Enter.
-
-4. Get Feedback: I'll tell you if your guess is:
-   • Too Low 📈 - the secret number is higher
-   • Too High 📉 - the secret number is lower
-   • Correct 🎉 - you found it!
-
-5. Use Strategy: The best strategy is Binary Search:
-   • Start by guessing the middle of the range
-   • If too low, guess the middle of the upper half
-   • If too high, guess the middle of the lower half
-   • This technique finds any number in the fewest attempts!
-
-6. Win and Rate: Once you find the number, you'll see your score and a performance rating based on how many attempts it took.
-
-7. Performance Ratings:
-   • Excellent: Found in optimal attempts (fastest possible)
-   • Great: Found in optimal + 3 attempts
-   • Good: Found in optimal + 6 attempts
-   • Keep Trying: Found in more attempts
-
-STRATEGY TIPS:
-- Use binary search for optimal guessing
-- A number between 1-100 takes maximum 7 guesses with perfect strategy
-- Pay attention to feedback and adjust your range accordingly
-- Try harder difficulties for more challenge!
-- The fewer attempts, the better your score!`
-        }
       }
     ]
   },
